@@ -4,8 +4,6 @@ import com.system.common.annotation.DataScope;
 import com.system.common.core.domain.BaseEntity;
 import com.system.common.utils.StringUtils;
 import com.system.framework.util.ShiroUtils;
-import com.system.service.domain.SysRole;
-import com.system.service.domain.SysUser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;

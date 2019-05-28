@@ -1,6 +1,5 @@
 package com.system.framework.web.service;
 
-import com.system.service.service.ISysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

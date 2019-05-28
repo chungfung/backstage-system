@@ -2,13 +2,13 @@
 spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.cj.jdbc.Driver
+        driverClassName: oracle.jdbc.driver.OracleDriver
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://localhost:3306/ry?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-                username: root
-                password: root
+                url: jdbc:oracle:thin:@10.173.205.92:1521/pdborcl
+                username: hebei_system
+                password: hgrica1024
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭

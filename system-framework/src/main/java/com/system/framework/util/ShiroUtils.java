@@ -3,7 +3,6 @@ package com.system.framework.util;
 import com.system.common.utils.StringUtils;
 import com.system.common.utils.bean.BeanUtils;
 import com.system.framework.shiro.realm.UserRealm;
-import com.system.service.domain.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.mgt.RealmSecurityManager;

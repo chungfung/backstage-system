@@ -6,7 +6,6 @@ import com.system.common.constant.Constants;
 import com.system.common.utils.MessageUtils;
 import com.system.common.utils.StringUtils;
 import com.system.framework.manager.factory.AsyncFactory;
-import com.system.service.domain.SysUser;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;

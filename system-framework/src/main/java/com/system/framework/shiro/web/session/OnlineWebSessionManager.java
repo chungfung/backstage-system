@@ -3,8 +3,6 @@ package com.system.framework.shiro.web.session;
 import com.system.framework.shiro.session.OnlineSession;
 import com.system.common.constant.ShiroConstants;
 import com.system.common.utils.spring.SpringUtils;
-import com.system.service.domain.SysUserOnline;
-import com.system.service.service.ISysUserOnlineService;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.session.ExpiredSessionException;
 import org.apache.shiro.session.InvalidSessionException;

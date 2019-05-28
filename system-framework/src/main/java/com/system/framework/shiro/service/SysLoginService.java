@@ -11,8 +11,6 @@ import com.system.common.utils.ServletUtils;
 import com.system.framework.manager.AsyncManager;
 import com.system.framework.manager.factory.AsyncFactory;
 import com.system.framework.util.ShiroUtils;
-import com.system.service.domain.SysUser;
-import com.system.service.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

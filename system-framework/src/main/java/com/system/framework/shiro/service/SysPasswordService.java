@@ -6,7 +6,6 @@ import com.system.common.constant.Constants;
 import com.system.common.exception.user.UserPasswordNotMatchException;
 import com.system.common.exception.user.UserPasswordRetryLimitExceedException;
 import com.system.common.utils.MessageUtils;
-import com.system.service.domain.SysUser;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;

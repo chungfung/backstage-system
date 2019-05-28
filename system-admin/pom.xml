@@ -66,6 +66,22 @@
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
+		<!-- fastJson依赖 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.chungfung</groupId>
+			<artifactId>system-service-common</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.chungfung</groupId>
+			<artifactId>system-framework</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

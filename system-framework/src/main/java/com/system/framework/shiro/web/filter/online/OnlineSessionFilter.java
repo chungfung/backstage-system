@@ -5,7 +5,6 @@ import com.system.framework.util.ShiroUtils;
 import com.system.common.constant.ShiroConstants;
 import com.system.common.enums.OnlineStatus;
 import com.system.framework.shiro.session.OnlineSessionDAO;
-import com.system.service.domain.SysUser;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;

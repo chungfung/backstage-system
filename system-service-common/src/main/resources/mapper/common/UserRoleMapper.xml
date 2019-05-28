@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.service.common.mapper.UserRoleMapper">
+  <resultMap id="userRoleMap" type="com.system.service.common.domain.UserRoleVO">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser" />
+  </resultMap>
+
+
+  <select id="selectByUserId" resultMap="userRoleMap">
+    select R.ROLE_ID,R.ROLE_NAME,UR.USER_ID
+    from TB_SYS_ROLE R,TB_SYS_USER_ROLE UR
+    where R.STATUS = '1' AND R.ROLE_ID = UR.ROLE_ID AND UR.USER_ID=#{userId}
+  </select>
+
+    <select id="selectByRoleId" resultMap="userRoleMap">
+        select R.ROLE_ID,R.ROLE_NAME,UR.USER_ID
+        from TB_SYS_ROLE R,TB_SYS_USER_ROLE UR
+        where R.STATUS = '1' AND R.ROLE_ID = UR.ROLE_ID and R.ROLE_ID=#{roleId,jdbcType=VARCHAR}
+    </select>
+
+  <delete id="delete">
+    delete from TB_SYS_USER_ROLE
+    <where>
+       <if test="userId !=null">AND  USER_ID = #{userId} </if>
+      <if test="roleId !=null" >AND  ROLE_ID = #{roleId}</if>
+    </where>
+  </delete>
+
+  <delete id="deleteNotIn">
+    delete from TB_SYS_USER_ROLE
+    where role_id not in
+    (
+    <foreach collection="roleIds" separator="," item="roleId">
+      #{roleId}
+    </foreach>
+    )
+    and user_id =#{userId}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.system.service.common.domain.UserRoleVO">
+    <selectKey keyProperty="id" order="BEFORE" resultType="string">
+      SELECT SEQ_USER_ROLE.nextval  from dual
+    </selectKey>
+    insert into TB_SYS_USER_ROLE
+    (ID,USER_ID,ROLE_ID,CREATE_TIME,UPDATE_TIME,CREATE_USER,UPDATE_USER)
+    SELECT #{id},#{userId},#{roleId},sysdate,sysdate,#{createUser},#{updateUser}
+    from dual where not exists (
+     select 1 from tb_sys_user_role where role_id=#{roleId} and user_id=#{userId}
+    )
+  </insert>
+
+
+</mapper>

@@ -8,8 +8,6 @@ import com.system.common.utils.StringUtils;
 import com.system.framework.manager.AsyncManager;
 import com.system.framework.manager.factory.AsyncFactory;
 import com.system.framework.util.ShiroUtils;
-import com.system.service.domain.SysOperLog;
-import com.system.service.domain.SysUser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;

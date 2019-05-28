@@ -2,8 +2,6 @@ package com.system.framework.shiro.service;
 
 import com.system.framework.shiro.session.OnlineSession;
 import com.system.common.utils.StringUtils;
-import com.system.service.domain.SysUserOnline;
-import com.system.service.service.ISysUserOnlineService;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
