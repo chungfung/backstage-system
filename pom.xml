@@ -11,7 +11,14 @@
 	<name>backstage-system</name>
 	<description>Demo project for Spring Boot</description>
 
+	<modules>
+		<module>system-admin</module>
+		<module>system-common</module>
+		<module>system-framework</module>
+	</modules>
+
 	<properties>
+		<ruoyi.version>0.0.1-SNAPSHOT</ruoyi.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -178,6 +185,27 @@
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi-ooxml</artifactId>
 				<version>${poi.version}</version>
+			</dependency>
+
+			<!-- 核心模块-->
+			<dependency>
+				<groupId>com.chungfung</groupId>
+				<artifactId>system-framework</artifactId>
+				<version>${ruoyi.version}</version>
+			</dependency>
+
+			<!-- 系统模块-->
+			<dependency>
+				<groupId>com.chungfung</groupId>
+				<artifactId>system-service</artifactId>
+				<version>${ruoyi.version}</version>
+			</dependency>
+
+			<!-- 通用工具-->
+			<dependency>
+				<groupId>com.chungfung</groupId>
+				<artifactId>system-common</artifactId>
+				<version>${ruoyi.version}</version>
 			</dependency>
 
 		</dependencies>

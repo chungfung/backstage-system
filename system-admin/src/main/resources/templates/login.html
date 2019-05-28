@@ -1,0 +1,59 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>用户管理子系统登录页</title>
+    <link rel="icon" href="${RESOURCES_PATH }/themes/default/images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="${RESOURCES_PATH }/login/css/loginCss.css" />
+</head>
+<body class="bdBg">
+<div class="loginBg">
+    <div class="myCont">
+        <div class="top">
+            <img class="logoLeft2" src="${RESOURCES_PATH }/login/img/logo.png" />
+        </div>
+        <!--<img class="bgImg" src="img/bj1.png" />-->
+        <img class="bgImg" src="${RESOURCES_PATH }/login/img/main.png" />
+        <img class="bgImg2" src="${RESOURCES_PATH }/login/img/shadow.png" />
+        <div class="form">
+            <form action="${CONTEXT_PATH }/login" method="post">
+            <span class="tit">用户管理子系统</span>
+            <h2>用户登录</h2>
+                <c:if test="${not empty error}">
+                    <div style="color:red">${error}</div>
+                </c:if>
+            <label class="form-group">
+                <span>用户</span>
+                <input type="text" class="focus" name="loginName" value="${loginName}" placeholder="请输入用户名" autofocus="autofocus" required="required"/>
+            </label>
+            <label class="form-group">
+                <span>密码</span>
+                <input type="password" name="password" placeholder="请输入密码" required="required"/>
+            </label>
+            <button>登&nbsp;&nbsp;录</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="${RESOURCES_PATH }/login/js/jquery-2.1.1.min.js" ></script>
+<script>
+    $(".form input[type='text'],.form input[type='password']").focus(function(){
+        $(".form input[type='text'],.form input[type='password']").removeClass('focus');
+        $(this).addClass('focus');
+    })
+    $(window).ready(function(){
+        var t = $(window).height()/2-$('.myCont').height()/2-28;
+        $('.myCont').css('padding-top',t)
+//			console.log($(window).width(),$(window).height());
+    })
+    $(window).resize(function(){
+        var t = $(window).height()/2-$('.myCont').height()/2-28;
+        $('.myCont').css('padding-top',t)
+//			console.log($(window).width(),$(window).height());
+    })
+</script>
+</html>

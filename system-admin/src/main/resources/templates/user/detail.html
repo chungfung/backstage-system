@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<form method="post"
+	  action="user/save" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone);">
+	<div class="pageFormContent" layoutH="56">
+		<input type="hidden" name="userId" value="${detail.userId}">
+		<dl>
+			<dt>登录名称:</dt>
+			<dd>
+				<input class="textInput required" value="${detail.loginName}" ${empty detail.userId?'':'readonly'}
+					   maxlength="30" byteLength="30" name="loginName" type="text"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>真实姓名:</dt>
+			<dd>
+				<input class="required textInput" name="fullName" value="${detail.fullName}" maxlength="30"
+					   byteLength="30" type="text"/>
+			</dd>
+		</dl>
+		<dl>
+			<dt>手机号码:</dt>
+			<dd>
+				<input  name="mobile" value="${detail.mobile}" maxlength="11" type="text"/>
+			</dd>
+		</dl>
+        <dl>
+            <dt>路段名称</dt>
+            <dd>
+                <select class="combox" value="${detail.roadNo}" reset-value="" name="roadNo" ref="StationNoSelect"
+                        refUrl="user/queryInUseStationByRoadNo?roadNo={value}">
+                    <option value="">--请选择--</option>
+                    <c:forEach items="${roadList}" var="road">
+                        <option value="${road.no}" ${detail.roadNo == road.no?"selected":""}>${road.name}</option>
+                    </c:forEach>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt>站名称</dt>
+            <select class="combox" value="${detail.stationNo}" reset-value="" name="stationNo" id="StationNoSelect">
+                <option value="">--请选择--</option>
+                <c:forEach items="${stationList}" var="station">
+                    <option value="${station.no}" ${detail.stationNo == station.no?"selected":""}>${station.name}</option>
+                </c:forEach>
+            </select>
+        </dl>
+		<dl>
+			<dt>状态:</dt>
+			<dd>
+				<select class="combox required" name="status" value="${detail.status}" id="status">
+					<option value="1" ${detail.status eq 1?"selected":""}>正常</option>
+					<option value="0" ${detail.status eq 0 ? "selected":""}>锁定</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>是否超级管理员:</dt>
+			<dd>
+				<select class="combox required" name="isAdmin" value="${detail.isAdmin}" id="isAdmin">
+					<option value="0" ${detail.isAdmin eq 0 ? "selected":""}>否</option>
+					<option value="1" ${detail.isAdmin eq 1 ? "selected":""}>是</option>
+				</select>
+			</dd>
+		</dl>
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div>
+			</li>
+			<li>
+				<div class="button"><div class="buttonContent"><button type="Button" class="close">取消</button></div></div>
+			</li>
+		</ul>
+	</div>
+</form>
