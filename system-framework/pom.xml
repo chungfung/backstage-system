@@ -74,12 +74,6 @@
 			<artifactId>UserAgentUtils</artifactId>
 		</dependency>
 
-		<!-- 系统模块-->
-		<dependency>
-			<groupId>com.chungfung</groupId>
-			<artifactId>system-service</artifactId>
-		</dependency>
-
 		<!-- 获取系统信息 -->
 		<dependency>
 			<groupId>com.github.oshi</groupId>
@@ -96,12 +90,7 @@
 			<artifactId>jna-platform</artifactId>
 		</dependency>
 
-		<!-- oracle -->
-		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>ojdbc6-11.2.0.4</artifactId>
-			<version>${oracle.version}</version>
-		</dependency>
+		<!-- 公共依赖 -->
 		<dependency>
 			<groupId>com.chungfung</groupId>
 			<artifactId>system-common</artifactId>

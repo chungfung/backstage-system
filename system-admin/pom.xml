@@ -73,6 +73,7 @@
 			<version>${fastjson.version}</version>
 		</dependency>
 
+		<!-- 模块依赖  -->
 		<dependency>
 			<groupId>com.chungfung</groupId>
 			<artifactId>system-service-common</artifactId>
@@ -81,6 +82,11 @@
 		<dependency>
 			<groupId>com.chungfung</groupId>
 			<artifactId>system-framework</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.chungfung</groupId>
+			<artifactId>system-common</artifactId>
 		</dependency>
 	</dependencies>
 

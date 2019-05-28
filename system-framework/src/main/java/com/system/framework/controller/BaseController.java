@@ -2,6 +2,7 @@ package com.system.framework.controller;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,8 +20,6 @@ public class BaseController {
 	
 	public static final String statusCode = "statusCode";
 	public static final String message = "message";
-
-	private  String resourcePath= this.getClass().getClassLoader().getResource("/").getPath() + "/template/";
 
 	public ModelAndView pageView(String viewName) {
 		ModelAndView mav = new ModelAndView(viewName);

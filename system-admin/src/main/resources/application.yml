@@ -1,107 +1,126 @@
 # 开发环境配置
 server:
-  # 服务器的HTTP端口，默认为80
-  port: 80
-  servlet:
-    # 应用的访问路径
-    context-path: /
-  tomcat:
-    # tomcat的URI编码
-    uri-encoding: UTF-8
-    # tomcat最大线程数，默认为200
-    max-threads: 800
-    # Tomcat启动初始化的线程数，默认值25
-    min-spare-threads: 30
+ # 服务器的HTTP端口，默认为80
+ port: 80
+ tomcat:
+  # tomcat的URI编码
+  uri-encoding: UTF-8
+  # tomcat最大线程数，默认为200
+  max-threads: 800
+  # Tomcat启动初始化的线程数，默认值25
+  min-spare-threads: 30
  
 # 日志配置
-logging:
-  level:
-    com.system: debug
-    org.springframework: warn
 
 # 用户配置
 user:
-  password:
-    # 密码错误{maxRetryCount}次锁定10分钟
-    maxRetryCount: 100
+ password:
+  # 密码错误{maxRetryCount}次锁定10分钟
+  maxRetryCount: 100
 
 # Spring配置
 spring:
-  # 模板引擎
-  thymeleaf:
-    mode: HTML5
-    encoding: utf-8
-    # 禁用缓存
-    cache: false
-  jackson:
-    time-zone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss
-  profiles:
-    active: druid
-  # 文件上传
-  servlet:
-     multipart:
-       # 单个文件大小
-       max-file-size:  10MB
-       # 设置总上传的文件大小
-       max-request-size:  20MB
-  # 服务模块
-  devtools:
-    restart:
-      # 热部署开关
-      enabled: true
+ # 模板引擎
+ thymeleaf:
+  encoding: utf-8
+  # 禁用缓存
+  cache: false
+ jackson:
+  time-zone: GMT+8
+  date-format: yyyy-MM-dd HH:mm:ss
+ # 文件上传
+ servlet:
+  multipart:
+   # 单个文件大小
+   max-file-size: 10MB
+   # 设置总上传的文件大小
+   max-request-size: 20MB
+ # 服务模块
+ devtools:
+  restart:
+  # 热部署开关
+    enabled: true
+ datasource:
+  # 使用druid数据源
+  type: com.alibaba.druid.pool.DruidDataSource
+  driver-class-name: oracle.jdbc.driver.OracleDriver
+  url: jdbc:oracle:thin:@10.173.205.92:1521:pdborcl
+  username: hebei_system
+  password: hgrica1024
+  # 下面为连接池的补充设置，应用到上面所有数据源中
+  # 初始化大小，最小，最大
+  initialSize: 1
+  minIdle: 3
+  maxActive: 216
+  # 配置获取连接等待超时的时间
+  maxWait: 30000
+  # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+  timeBetweenEvictionRunsMillis: 60000
+  # 配置一个连接在池中最小生存的时间，单位是毫秒
+  minEvictableIdleTimeMillis: 30000
+  validationQuery: select 1 from dual
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  # 打开PSCache，并且指定每个连接上PSCache的大小
+  poolPreparedStatements: true
+  maxPoolPreparedStatementPerConnectionSize: 20
+  # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+  filters: stat,wall,slf4j
+  # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  # 合并多个DruidDataSource的监控数据
+  #useGlobalDataSourceStat: true
 
 # MyBatis
 mybatis:
-    # 搜索指定包别名
-    typeAliasesPackage: com.system
-    # 配置mapper的扫描，找到所有的mapper.xml映射文件
-    mapperLocations: classpath*:mapper/**/*Mapper.xml
-    # 加载全局的配置文件
-    configLocation: classpath:mapper/mybatis-config.xml
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mapper/mybatis-config.xml
 
 # PageHelper分页插件
 pagehelper: 
-  helperDialect: oracle
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql 
+ helperDialect: oracle
+ reasonable: true
+ supportMethodsArguments: true
+ params: count=countSql
 
 # Shiro
 shiro:
-  user:
-    # 登录地址
-    loginUrl: /login
-    # 权限认证失败地址
-    unauthorizedUrl: /unauth
-    # 首页地址
-    indexUrl: /index
-    # 验证码开关
-    captchaEnabled: true
-    # 验证码类型 math 数组计算 char 字符
-    captchaType: math
-  cookie:
-    # 设置Cookie的域名 默认空，即当前访问的域名
-    domain: 
-    # 设置cookie的有效访问路径
-    path: /
-    # 设置HttpOnly属性
-    httpOnly: true
-    # 设置Cookie的过期时间，天为单位
-    maxAge: 30
-  session:
-    # Session超时时间（默认30分钟）
-    expireTime: 30
-    # 同步session到数据库的周期（默认1分钟）
-    dbSyncPeriod: 1
-    # 相隔多久检查一次session的有效性，默认就是10分钟
-    validationInterval: 10
+ user:
+  # 登录地址
+  loginUrl: /login
+  # 权限认证失败地址
+  unauthorizedUrl: /unauth
+  # 首页地址
+  indexUrl: /index
+  # 验证码开关
+  captchaEnabled: true
+  # 验证码类型 math 数组计算 char 字符
+  captchaType: math
+ cookie:
+  # 设置Cookie的域名 默认空，即当前访问的域名
+  domain: 
+  # 设置cookie的有效访问路径
+  path: /
+  # 设置HttpOnly属性
+  httpOnly: true
+  # 设置Cookie的过期时间，天为单位
+  maxAge: 30
+ session:
+  # Session超时时间（默认30分钟）
+  expireTime: 30
+  # 同步session到数据库的周期（默认1分钟）
+  dbSyncPeriod: 1
+  # 相隔多久检查一次session的有效性，默认就是10分钟
+  validationInterval: 10
 
 # 防止XSS攻击
 xss: 
-  # 过滤开关
-  enabled: true
-  # 排除链接（多个用逗号分隔）
-  excludes: /system/notice/*
-  # 匹配链接
-  urlPatterns: /system/*,/monitor/*,/tool/*
+ # 过滤开关
+ enabled: true
+ # 排除链接（多个用逗号分隔）
+ excludes: /system/notice/*
+ # 匹配链接
+ urlPatterns: /system/*,/monitor/*,/tool/*

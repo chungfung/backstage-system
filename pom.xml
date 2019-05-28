@@ -234,6 +234,13 @@
 				<version>${hgsoft.backstage.version}</version>
 			</dependency>
 
+			<!-- oracle -->
+			<dependency>
+				<groupId>oracle</groupId>
+				<artifactId>ojdbc6-11.2.0.4</artifactId>
+				<version>${oracle.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
