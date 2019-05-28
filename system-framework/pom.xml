@@ -102,6 +102,10 @@
 			<artifactId>ojdbc6-11.2.0.4</artifactId>
 			<version>${oracle.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.chungfung</groupId>
+			<artifactId>system-common</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

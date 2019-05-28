@@ -15,6 +15,10 @@
 		<module>system-admin</module>
 		<module>system-common</module>
 		<module>system-framework</module>
+		<module>system-job-admin</module>
+		<module>system-job-core</module>
+		<module>system-job-schedule</module>
+		<module>system-service-common</module>
 	</modules>
 
 	<properties>
