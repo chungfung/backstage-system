@@ -43,7 +43,7 @@ public class ControllerAspect {
         logger.info("请求IP: " + request.getRemoteAddr());
         Enumeration<String> enu = request.getParameterNames();
         while (enu.hasMoreElements()) {
-            String name = (String) enu.nextElement();
+            String name = enu.nextElement();
             logger.info("请求参数:{}->:{}", name, request.getParameter(name));
         }
     }
