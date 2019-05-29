@@ -10,6 +10,7 @@ import lombok.Data;
  */
 @Data
 public class CodeVO {
+
     /** 编码*/
     private String no;
     /**

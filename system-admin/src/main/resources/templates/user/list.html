@@ -1,20 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
 
-<form id="pagerForm" method="post" action="user/list">
-    <input type="hidden" name="pageNum" value="${pageBean.pageNum}" />
-    <input type="hidden" name="numPerPage" value="${pageBean.pageSize}" />
+<form id="pagerForm" method="post" th:action="@{user/list}">
+    <input type="hidden" name="pageNum" th:value="${pageBean.pageNum}" />
+    <input type="hidden" name="numPerPage" th:value="${pageBean.pageSize}" />
 </form>
 
 <div class="pageHeader">
-    <form onsubmit="return navTabSearch(this);" action="user/list" method="post">
+    <form onsubmit="return navTabSearch(this);" th:action="@{user/list}" method="post">
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
                     <td>
                         用户名称：
-                        <input type="text" name="fullName" value="${param.fullName}" class="textInput">
+                        <input type="text" name="fullName" th:value="${param.fullName}" class="textInput">
                     </td>
                 </tr>
             </table>
@@ -39,10 +38,10 @@
             <li><a class="delete" href="user/delete?userId={userId}" mask="true"
                    target="ajaxTodo" title="删除用户" rel="userDelete"><i class="fa fa-trash-o fa-lg fa-fw"></i><label>删除</label></a></li>
             <li><a class="edit" title="分配角色" href="role/listRole?userId={userId}" mask="true"
-                                    target="dialog" height="500" width="800" title="分配角色" rel="roleLoad">
+                                    target="dialog" height="500" width="800" rel="roleLoad">
                 <i class="fa fa-cog fa-lg fa-fw"></i><label>分配角色</label></a></li>
             <li><a class="edit" title="重置密码" href="user/resetPwd?userId={userId}" mask="true"
-                   target="ajaxTodo"  title="重置密码"><i class="fa fa-retweet fa-lg fa-fw"></i><label>重置密码</label></a></li>
+                   target="ajaxTodo" ><i class="fa fa-retweet fa-lg fa-fw"></i><label>重置密码</label></a></li>
 
         </ul>
     </div>
@@ -59,33 +58,32 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="item" items="${pageBean.list}">
-            <tr target="userId" rel="${item.userId}">
-                <td>${item.loginName}</td>
-                <td>${item.fullName}</td>
-                <td>${item.mobile}</td>
-                <td>${item.roadName}</td>
-                <td>${item.stationName}</td>
-                <td>${item.status eq 0?'锁定':"正常"}</td>
-                <td>${item.isAdmin eq 0?'否':"是"}</td>
+            <tr target="userId" rel="${item.userId}" th:each="item: ${pageBean.list}">
+                <td th:text="${item.loginName}"></td>
+                <td th:text="${item.fullName}"></td>
+                <td th:text="${item.mobile}"></td>
+                <td th:text="${item.roadName}"></td>
+                <td th:text="${item.stationName}"></td>
+                <td th:text="${item.status eq 0?'锁定':'正常'}"></td>
+                <td th:text="${item.isAdmin eq 0?'否':'是'}"></td>
             </tr>
-        </c:forEach>
         </tbody>
     </table>
     <div class="panelBar">
         <div class="pages">
             <span>显示</span>
             <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-                <option value="20" ${pageBean.pageSize == 20?"selected":""}>20</option>
-                <option value="50" ${pageBean.pageSize == 50?"selected":""}>50</option>
-                <option value="100" ${pageBean.pageSize == 100?"selected":""}>100</option>
-                <option value="200" ${pageBean.pageSize == 200?"selected":""}>200</option>
+                <option value="20" th:selected="${pageBean.pageSize == 20?true:false}">20</option>
+                <option value="50" th:selected="${pageBean.pageSize == 50?true:false}">50</option>
+                <option value="100" th:selected="${pageBean.pageSize == 100?true:false}">100</option>
+                <option value="200" th:selected="${pageBean.pageSize == 200?true:false}">200</option>
             </select>
-            <span>条，共${pageBean.total}条</span>
+            <span th:text="'条，共' + ${pageBean.total} + '条'"></span>
         </div>
 
-        <div class="pagination" targetType="navTab" totalCount="${pageBean.total}"
-             numPerPage="${pageBean.pageSize}" pageNumShown="10" currentPage="${pageBean.pageNum }"></div>
+        <div class="pagination" targetType="navTab"
+             th:attr="totalCount='${pageBean.total}',numPerPage='${pageBean.pageSize}',currentPage='${pageBean.pageNum }'" pageNumShown="10" ></div>
 
     </div>
 </div>
+</html>
