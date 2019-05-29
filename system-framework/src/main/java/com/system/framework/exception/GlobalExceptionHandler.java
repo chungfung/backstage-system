@@ -17,10 +17,12 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
     public Object errorHandler(Exception ex,HttpServletRequest req) {
+        logger.error("捕获全局异常！",ex);
+
         if(req.getHeader("X-Requested-With")!=null
                 && "XMLHttpRequest".equals(req.getHeader("X-Requested-With").toString())) {
             Map<String,Object> map = new HashMap<String,Object>();
