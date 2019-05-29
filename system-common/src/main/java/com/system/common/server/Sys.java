@@ -1,4 +1,4 @@
-package com.system.common.domain.server;
+package com.system.common.server;
 
 /**
  * 系统相关信息

@@ -1,6 +1,6 @@
 package com.system.common.utils.reflect;
 
-import com.system.common.core.text.Convert;
+import com.system.common.text.Convert;
 import com.system.common.utils.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
