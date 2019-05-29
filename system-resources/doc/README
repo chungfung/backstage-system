@@ -7,3 +7,5 @@ backstage-system:
     system-job-schedule: 任务调度层
     system-resources: 文档库
     system-service-common: 服务层和数据库访问层
+
+依赖关系：system-admin 《- system-framework 《- system-service-common 《- system-common

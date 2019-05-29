@@ -1,4 +1,4 @@
-package com.system.framework.page;
+package com.system.common.page;
 
 import com.github.pagehelper.PageHelper;
 import lombok.Data;

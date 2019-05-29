@@ -38,12 +38,6 @@
 			<artifactId>druid-spring-boot-starter</artifactId>
 		</dependency>
 
-		<!-- pagehelper 分页插件 -->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper-spring-boot-starter</artifactId>
-		</dependency>
-
 		<!-- shiro安全认证 -->
 		<!-- Shiro使用Srping框架 -->
 		<dependency>
@@ -78,7 +72,7 @@
 		<!-- 公共依赖 -->
 		<dependency>
 			<groupId>com.chungfung</groupId>
-			<artifactId>system-common</artifactId>
+			<artifactId>system-service-common</artifactId>
 		</dependency>
 
 	</dependencies>
