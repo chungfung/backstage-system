@@ -1,6 +1,6 @@
 package com.system.common.utils;
 
-import com.system.common.core.text.StrFormatter;
+import com.system.common.text.StrFormatter;
 
 import java.util.Collection;
 import java.util.Map;

@@ -1,19 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<form id="pagerForm" method="post" action="role/list">
-	<input type="hidden" name="pageNum" value="${pageBean.pageNum}" />
-	<input type="hidden" name="numPerPage" value="${pageBean.pageSize}" />
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<form id="pagerForm" method="post" th:action="@{role/list}">
+	<input type="hidden" name="pageNum" th:value="${pageBean.pageNum}" />
+	<input type="hidden" name="numPerPage" th:value="${pageBean.pageSize}" />
 </form>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);"
-		action="role/list" method="post">
+	<form onsubmit="return navTabSearch(this);"  th:action="@{role/list}" method="post">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
 				<td>
-					角色名称：<input type="text" name="roleName" value="${param.roleName}"/>
+					角色名称：<input type="text" name="roleName" th:value="${param.roleName}"/>
 				</td>
 			</tr>
 		</table>
@@ -29,18 +28,22 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="role/detail" mask="true"
-				mask="true" target="dialog" title="添加角色" >
-				<i class="fa fa-plus-square fa-lg fa-fw"></i><label>新增</label></a></li>
-			<li><a class="edit" href="role/detail?roleId={roleId}" mask="true"
-				mask="true"  target="dialog" title="修改角色" >
-				<i class="fa fa-pencil fa-lg fa-fw"></i><label>修改</label></a></li>
-			<li><a class="delete" href="role/delete?roleId={roleId}" mask="true"
-				   mask="true"  target="ajaxTodo" title="删除角色" >
-				<i class="fa fa-trash-o fa-lg fa-fw"></i><label>删除</label></a></li>
-			<li><a class="edit" href="menu/load?roleId={roleId}" mask="true"
-				   mask="true"  target="dialog"  height="500" title="关联菜单" >
-				<i class="fa fa-cog fa-lg fa-fw"></i><label>关联菜单</label></a></li>
+			<li><a class="add" href="role/detail" mask="true" target="dialog" title="添加角色" >
+					<i class="fa fa-plus-square fa-lg fa-fw"></i><label>新增</label>
+				</a>
+			</li>
+			<li><a class="edit" href="role/detail?roleId={roleId}" mask="true"  target="dialog" title="修改角色" >
+					<i class="fa fa-pencil fa-lg fa-fw"></i><label>修改</label>
+				</a>
+			</li>
+			<li><a class="delete" href="role/delete?roleId={roleId}" mask="true"  target="ajaxTodo" title="删除角色" >
+				<i class="fa fa-trash-o fa-lg fa-fw"></i><label>删除</label>
+				</a>
+			</li>
+			<li><a class="edit" href="menu/load?roleId={roleId}" mask="true"  target="dialog"  height="500" title="关联菜单" >
+				<i class="fa fa-cog fa-lg fa-fw"></i><label>关联菜单</label>
+				</a>
+			</li>
 		</ul>
 	</div>
 	<table class="list" width="100%" layoutH="115">
@@ -55,32 +58,31 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${pageBean.list }" var="item" varStatus="itemStatus">
-				<tr target="roleId" rel="${item.roleId }">
-					<td>${item.roleName}</td>
-					<td>${item.roleRemark}</td>
-					<td>${item.createUser}</td>
-					<td><fmt:formatDate type="both" value="${item.createTime}" /></td>
-					<td>${item.updateUser}</td>
-					<td><fmt:formatDate type="both" value="${item.updateTime}" /></td>
-				</tr>
-			</c:forEach>
+			<tr target="roleId" th:each="item:${pageBean.list}" th:attr="rel='${item.roleId }'">
+				<td th:text="${item.roleName}"></td>
+				<td th:text="${item.roleRemark}"></td>
+				<td th:text="${item.createUser}"></td>
+				<td th:text="${#dates.format(item.createTime,'YYYY-MM-DD hh:mm:ss')}" />"></td>
+				<td th:text="${item.updateUser}"></td>
+				<td th:text="${#dates.format(item.updateTime,'YYYY-MM-DD hh:mm:ss')}" />"></td>
+			</tr>
 		</tbody>
 	</table>
 	<div class="panelBar">
 		<div class="pages">
 			<span>显示</span>
 			<select class="combox" name="pageSize" onchange="navTabPageBreak({pageSize:this.value})">
-				<option value="20" ${pageBean.pageSize == 20?"selected":""}>20</option>
-				<option value="50" ${pageBean.pageSize == 50?"selected":""}>50</option>
-				<option value="100" ${pageBean.pageSize == 100?"selected":""}>100</option>
-				<option value="200" ${pageBean.pageSize == 200?"selected":""}>200</option>
+				<option value="20" th:selected="${pageBean.pageSize == 20?true:false}">20</option>
+				<option value="50" th:selected="${pageBean.pageSize == 50?true:false}">50</option>
+				<option value="100" th:selected="${pageBean.pageSize == 100?true:false}">100</option>
+				<option value="200" th:selected="${pageBean.pageSize == 200?true:false}">200</option>
 			</select>
-			<span>条，共${pageBean.total}条</span>
+			<span th:text="'条，共' + ${pageBean.total} + '条'"></span>
 		</div>
 
-		<div class="pagination" targetType="navTab" totalCount="${pageBean.total}"
-			numPerPage="${pageBean.pageSize}" pageNumShown="10" currentPage="${pageBean.pageNum }"></div>
+		<div class="pagination" targetType="navTab"
+			 th:attr="totalCount='${pageBean.total}',numPerPage='${pageBean.pageSize}',currentPage='${pageBean.pageNum }'" pageNumShown="10" ></div>
 
 	</div>
 </div>
+</html>

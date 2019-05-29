@@ -1,4 +1,4 @@
-package com.system.common.core.text;
+package com.system.common.text;
 
 import com.system.common.utils.StringUtils;
 

@@ -1,14 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
 <div class="pageHeader">
-	<form onsubmit="return dialogSearch(this);" action="role/listRole" method="post">
+	<form onsubmit="return dialogSearch(this);" th:action="@{role/listRole}" method="post">
 	<div class="searchBar">
-		<input name="userId" type="hidden" value="${param.userId}"/>
+		<input name="userId" type="hidden" th:value="${userId}"/>
 		<table class="searchContent">
 			<tr>
 				<td>
-					角色名称：<input type="text" name="roleName" value="${param.roleName}"/>
+					角色名称：<input type="text" name="roleName" th:value="${roleName}"/>
 				</td>
 			</tr>
 		</table>
@@ -24,7 +23,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="edit" href="user/setRole?userId=${param.userId}"
+			<li><a class="edit" th:href="@{'user/setRole?userId=' + ${param.userId}}"
 				   mask="true" rel="roleIds" target="selectedTodo" targetType="dialog" title="确定分配" >
 				<i class="fa fa-check-square fa-lg fa-fw"></i><label>确定</label></a></li>
 		</ul>
@@ -39,13 +38,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list }" var="item" varStatus="itemStatus">
-				<tr rel="${item.roleId }">
-					<td><input name="roleIds" type="checkbox" value="${item.roleId }" <c:if test="${item.checked=='true'}">checked</c:if> /></td>
-					<td>${item.roleName}</td>
-					<td>${item.roleRemark}</td>
-				</tr>
-			</c:forEach>
+			<tr th:each="item: ${list}" th:attr="rel='${item.roleId }'">
+				<td><input name="roleIds" type="checkbox" th:value="${item.roleId }" th:checked="${item.checked eq 'true'?true:false}"></td>
+				<td th:text="${item.roleName}"></td>
+				<td th:text="${item.roleRemark}"></td>
+			</tr>
 		</tbody>
 	</table>
 </div>
+</html>

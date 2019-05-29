@@ -8,12 +8,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @Description
+ * @Author 丰涌
+ * @Date 2018/12/21 17:44
+ * @Version 1.0
+ */
 public class BaseController {
-	
-	public static final String html = "html";
-	public static final String json = "json";
-
-	public static final String ajaxDone="/ajaxDone";
 	
 	public static final String CODE_200 = "200";
 	public static final String CODE_300 = "300";
@@ -38,9 +39,9 @@ public class BaseController {
 		for (int i = 0; i < paramKeyAndVal.length; i=i+2) {
 			mav.addObject(paramKeyAndVal[i].toString(), paramKeyAndVal[i+1]);
 		}
-		
-	    return mav; 
+	    return mav;
 	}
+
 	public static ModelAndView errorJsonView(Object ...paramKeyAndVal) {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		mav.addObject(statusCode, CODE_300);
@@ -51,6 +52,7 @@ public class BaseController {
 
 		return mav;
 	}
+
 	public ModelAndView jsonView() {
 		ModelAndView mav = new ModelAndView(new MappingJackson2JsonView());
 		mav.addObject("statusCode", CODE_200);

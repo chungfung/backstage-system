@@ -1,4 +1,4 @@
-package com.system.common.domain.server;
+package com.system.common.server;
 
 import com.system.common.utils.Arith;
 import com.system.common.utils.DateUtils;
