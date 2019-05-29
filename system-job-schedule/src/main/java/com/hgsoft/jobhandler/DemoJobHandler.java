@@ -1,4 +1,4 @@
-package com.system.jobhandler;
+package com.hgsoft.jobhandler;
 
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.IJobHandler;

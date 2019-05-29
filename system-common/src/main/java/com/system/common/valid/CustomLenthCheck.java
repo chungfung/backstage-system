@@ -14,15 +14,18 @@ import static java.lang.annotation.ElementType.*;
  * @Version 1.0
  */
 @Constraint(validatedBy = CustomLenthCheckDeal.class)
-@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CustomLenthCheck {
 
     int max() default Integer.MAX_VALUE;
+
     int min() default 0;
+
     String message() default "长度错误！";
 
 
     Class<?>[] groups() default {};
+
     Class<? extends javax.validation.Payload>[] payload() default {};
 }

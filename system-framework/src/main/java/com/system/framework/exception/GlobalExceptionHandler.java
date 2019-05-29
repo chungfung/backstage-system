@@ -1,4 +1,4 @@
-package com.system.framework.web.exception;
+package com.system.framework.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,6 @@ import java.util.Map;
 
 /**
  * 全局异常处理器
- * 
  * @author system
  */
 @ControllerAdvice

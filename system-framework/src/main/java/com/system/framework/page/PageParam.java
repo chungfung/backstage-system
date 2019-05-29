@@ -1,4 +1,4 @@
-package com.system.common.page;
+package com.system.framework.page;
 
 import com.github.pagehelper.PageHelper;
 import lombok.Data;
@@ -6,14 +6,20 @@ import lombok.Data;
 @Data
 public class PageParam {
 
-	// 第几页
+	/**
+	 * 第几页
+	 */
 	private Integer pageNum = 1;
-	// 每页记录数
+
+	/**
+	 * 每页记录数
+	 */
 	private Integer numPerPage = 50;
 
 	public PageParam() {
 		super();
 	}
+
 	public PageParam(Integer pageNum, Integer numPerPage) {
 		super();
 		this.pageNum = pageNum;

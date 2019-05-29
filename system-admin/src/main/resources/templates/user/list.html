@@ -55,7 +55,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr target="userId" rel="${item.userId}" th:each="item: ${pageBean.list}">
+            <tr target="userId" th:attr="rel='${item.userId}'" th:each="item: ${pageBean.list}">
                 <td th:text="${item.loginName}"></td>
                 <td th:text="${item.fullName}"></td>
                 <td th:text="${item.mobile}"></td>

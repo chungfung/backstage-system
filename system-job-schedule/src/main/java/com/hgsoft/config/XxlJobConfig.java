@@ -1,4 +1,4 @@
-package com.system.config;
+package com.hgsoft.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import org.slf4j.Logger;

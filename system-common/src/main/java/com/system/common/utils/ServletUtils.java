@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  * 客户端工具类
- * 
+ *
  * @author ruoyi
  */
 public class ServletUtils {
@@ -72,9 +72,9 @@ public class ServletUtils {
 
     /**
      * 将字符串渲染到客户端
-     * 
+     *
      * @param response 渲染对象
-     * @param string 待渲染的字符串
+     * @param string   待渲染的字符串
      * @return null
      */
     public static String renderString(HttpServletResponse response, String string) {
@@ -90,7 +90,7 @@ public class ServletUtils {
 
     /**
      * 是否是Ajax异步请求
-     * 
+     *
      * @param request
      */
     public static boolean isAjaxRequest(HttpServletRequest request) {

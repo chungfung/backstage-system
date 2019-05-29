@@ -1,7 +1,7 @@
 package com.system.service.common.service;
 
-import com.system.common.page.PageBean;
-import com.system.common.page.PageParam;
+import com.system.framework.page.PageBean;
+import com.system.framework.page.PageParam;
 import com.system.service.common.domain.UserVO;
 
 /**

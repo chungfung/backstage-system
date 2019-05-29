@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @Date 2018/11/22 15:20
  * @Version 1.0
  */
-public class CustomLenthCheckDeal implements ConstraintValidator<CustomLenthCheck,String> {
+public class CustomLenthCheckDeal implements ConstraintValidator<CustomLenthCheck, String> {
 
     private int min;
     private int max;
@@ -25,28 +25,28 @@ public class CustomLenthCheckDeal implements ConstraintValidator<CustomLenthChec
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if (s == null){
+        if (s == null) {
             return true;
-        }else {
+        } else {
             int chineseNums = chineseNums(s);
             int len = s.length();
-            int total = (len-chineseNums)+chineseNums*3;
-            if(len < min) {
+            int total = (len - chineseNums) + chineseNums * 3;
+            if (len < min) {
                 return false;
             }
-            if(total > max) {
+            if (total > max) {
                 return false;
             }
             return true;
         }
     }
 
-    private static int chineseNums(String text){
+    private static int chineseNums(String text) {
         int amount = 0;
-        for(int i = 0;i<text.length();i++){
-            Matcher m = pattern.matcher(text.charAt(i)+"");
-            if(m.matches()){
-                amount ++;
+        for (int i = 0; i < text.length(); i++) {
+            Matcher m = pattern.matcher(text.charAt(i) + "");
+            if (m.matches()) {
+                amount++;
             }
         }
         return amount;

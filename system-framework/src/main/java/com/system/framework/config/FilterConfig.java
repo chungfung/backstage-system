@@ -17,8 +17,8 @@ import java.util.Map;
  * @author system
  */
 @Configuration
-public class FilterConfig
-{
+public class FilterConfig {
+
     @Value("${xss.enabled}")
     private String enabled;
 
@@ -30,8 +30,7 @@ public class FilterConfig
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Bean
-    public FilterRegistrationBean xssFilterRegistration()
-    {
+    public FilterRegistrationBean xssFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setDispatcherTypes(DispatcherType.REQUEST);
         registration.setFilter(new XssFilter());

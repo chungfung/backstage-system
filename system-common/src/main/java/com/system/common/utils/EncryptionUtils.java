@@ -20,13 +20,14 @@ public class EncryptionUtils {
      */
     private final static int hashIterations = 2;
 
-        /**
+    /**
      * 用户名生成盐值对密码进行加密
+     *
      * @param password
      * @return
      */
-    public static String encrypt(String loginName,String password) {
-        Hash hash=new SimpleHash(algorithmName, new SimpleByteSource(password),new SimpleByteSource(loginName),hashIterations);
-        return   hash.toHex();
+    public static String encrypt(String loginName, String password) {
+        Hash hash = new SimpleHash(algorithmName, new SimpleByteSource(password), new SimpleByteSource(loginName), hashIterations);
+        return hash.toHex();
     }
 }

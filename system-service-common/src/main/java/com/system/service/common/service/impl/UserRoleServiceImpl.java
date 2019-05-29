@@ -2,8 +2,8 @@ package com.system.service.common.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.util.StringUtil;
-import com.system.common.page.PageBean;
-import com.system.common.page.PageParam;
+import com.system.framework.page.PageBean;
+import com.system.framework.page.PageParam;
 import com.system.service.common.domain.UserRoleVO;
 import com.system.service.common.mapper.UserRoleMapper;
 import com.system.service.common.service.IUserRoleService;

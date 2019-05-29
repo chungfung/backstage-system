@@ -1,7 +1,7 @@
 package com.system.admin.controller;
 
-import com.system.common.page.PageBean;
-import com.system.common.page.PageParam;
+import com.system.framework.page.PageBean;
+import com.system.framework.page.PageParam;
 import com.system.common.utils.EncryptionUtils;
 import com.system.framework.controller.BaseController;
 import com.system.service.common.domain.CodeVO;

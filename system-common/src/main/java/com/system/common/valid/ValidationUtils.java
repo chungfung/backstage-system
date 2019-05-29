@@ -17,29 +17,29 @@ import java.util.Set;
  */
 public class ValidationUtils {
 
-    private static Validator validator =  Validation.buildDefaultValidatorFactory().getValidator();
+    private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
-    public static <T> ValidationResult validateEntity(T obj){
+    public static <T> ValidationResult validateEntity(T obj) {
         ValidationResult result = new ValidationResult();
-        Set<ConstraintViolation<T>> set = validator.validate(obj,Default.class);
-        if( CollectionUtils.isNotEmpty(set) ){
+        Set<ConstraintViolation<T>> set = validator.validate(obj, Default.class);
+        if (CollectionUtils.isNotEmpty(set)) {
             result.setHasErrors(true);
             List<String> errorMsg = new ArrayList<String>();
-            for(ConstraintViolation<T> cv : set){
+            for (ConstraintViolation<T> cv : set) {
                 errorMsg.add(cv.getMessage());
             }
-            result.setErrorMsg(String.join(",",errorMsg));
+            result.setErrorMsg(String.join(",", errorMsg));
         }
         return result;
     }
 
-    public static <T> ValidationResult validateProperty(T obj,String propertyName){
+    public static <T> ValidationResult validateProperty(T obj, String propertyName) {
         ValidationResult result = new ValidationResult();
-        Set<ConstraintViolation<T>> set = validator.validateProperty(obj,propertyName,Default.class);
-        if( CollectionUtils.isNotEmpty(set) ){
+        Set<ConstraintViolation<T>> set = validator.validateProperty(obj, propertyName, Default.class);
+        if (CollectionUtils.isNotEmpty(set)) {
             result.setHasErrors(true);
             List<String> errorMsg = new ArrayList<String>();
-            for(ConstraintViolation<T> cv : set){
+            for (ConstraintViolation<T> cv : set) {
                 errorMsg.add(cv.getMessage());
             }
             result.setErrorMsg(String.join(",", errorMsg));

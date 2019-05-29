@@ -1,9 +1,9 @@
 package com.system.service.common.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.system.common.page.PageBean;
-import com.system.common.page.PageParam;
 import com.system.common.utils.EncryptionUtils;
+import com.system.framework.page.PageBean;
+import com.system.framework.page.PageParam;
 import com.system.service.common.domain.UserVO;
 import com.system.service.common.mapper.UserMapper;
 import com.system.service.common.service.IUserService;
