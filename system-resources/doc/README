@@ -1,0 +1,9 @@
+项目结构：
+backstage-system:
+    system-admin: 后台管理系统控制层
+    system-common: 公共资源、不依赖于任何模块，可独立使用
+    system-framework: 框架层，使用此框架需要依赖的层级
+    system-job-admin: 任务调度后台管理
+    system-job-schedule: 任务调度层
+    system-resources: 文档库
+    system-service-common: 服务层和数据库访问层
