@@ -221,7 +221,7 @@ a:hover {text-decoration:underline;}
 .tree .hover .indeterminate { background-position:0 -250px;}
 
 /* Accordion */
-.accordion { display:block; border-style:solid; border-width:1px 1px 0 1px;}
+.accordion { display:block; border-style:solid; border-width:1px 1px 0 1px;background-color: #eaf4ff;}
 .accordion .accordionHeader { display:block; overflow:hidden; background-repeat:repeat-x; cursor:pointer;}
 .accordion .accordionHeader h2 { display:block; overflow:hidden; padding:0 25px 0 5px; height:25px; line-height:24px;}
 .accordion .accordionHeader h2 span { float:left; display:block; overflow:hidden; text-indent:-1000px; width:20px; height:25px;}
