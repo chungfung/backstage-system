@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.job.admin.dao.XxlJobRegistryDao">
+	<resultMap id="XxlJobRegistry" type="com.xxl.job.admin.core.model.XxlJobRegistry" >
+		<result column="id" property="id" />
+	    <result column="registry_group" property="registryGroup" />
+	    <result column="registry_key" property="registryKey" />
+	    <result column="registry_value" property="registryValue" />
+		<result column="update_time" property="updateTime" />
+	</resultMap>
+	
+	<delete id="removeDead" parameterType="java.lang.Integer" >
+		DELETE FROM TD_TRIGGER_REGISTRY WHERE UPDATE_TIME <![CDATA[ < ]]>sysdate-numtodsinterval(#{timeout},'second')
+	</delete>
+
+	<select id="findAll" parameterType="java.lang.Integer" resultMap="XxlJobRegistry">
+		SELECT T.ID,
+				T.REGISTRY_GROUP,
+				T.REGISTRY_KEY,
+				T.REGISTRY_VALUE,
+				T.UPDATE_TIME
+		FROM TD_TRIGGER_REGISTRY t
+		WHERE t.update_time <![CDATA[ > ]]> sysdate-numtodsinterval(#{timeout},'second')
+	</select>
+
+    <update id="registryUpdate" >
+        UPDATE TD_TRIGGER_REGISTRY
+        SET update_time = sysdate
+        WHERE registry_group = #{registryGroup} AND registry_key = #{registryKey} AND registry_value = #{registryValue}
+    </update>
+
+    <insert id="registrySave" >
+		<selectKey resultType="int" order="BEFORE" keyProperty="id">
+			SELECT SEQ_TD_TRIGGER_REGISTRY.NEXTVAL FROM DUAL
+		</selectKey>
+         INSERT INTO TD_TRIGGER_REGISTRY (
+			ID,
+         	REGISTRY_GROUP,
+         	REGISTRY_KEY,
+      		REGISTRY_VALUE,
+      		UPDATE_TIME)
+    	 VALUES (#{id,jdbcType=DECIMAL},
+				 #{registryGroup,jdbcType=VARCHAR},
+    			 #{registryKey,jdbcType=VARCHAR},
+      			 #{registryValue,jdbcType=VARCHAR},
+      			 sysdate)
+    </insert>
+
+	<delete id="registryDelete" >
+		DELETE FROM TD_TRIGGER_REGISTRY
+		WHERE registry_group = #{registryGroup}
+		AND registry_key = #{registryKey}
+		AND registry_value = #{registryValue}
+	</delete>
+
+</mapper>

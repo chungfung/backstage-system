@@ -1,0 +1,187 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<style>
+	i {
+		display: inline !important;
+	}
+	i:hover{
+		cursor: pointer;
+	}
+</style>
+<form id="pagerForm" method="post" action="menu/listMenu">
+	<input type="hidden" name="systemType" value="${param.systemType}"/>
+</form>
+<%--<div class="pageHeader" style="border:1px #B8D0D6 solid">
+	<form id="pagerForm" onsubmit="return divSearch(this, 'listMenu');" action="menu/listMenu" method="post">
+		<input type="hidden" name="systemType" value="${param.systemType}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						菜单名称：<input type="text" name="name"/>
+					</td>
+					<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</div>--%>
+<div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid" >
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="menu/detail?systemType=${param.systemType}" target="dialog" mask="true" rel="menuAdd">
+				<i class="fa fa-plus-square fa-lg fa-fw"></i><label>添加根节点</label></a></li>
+		</ul>
+	</div>
+	<table class="list" width="99%" layoutH="80" rel="listMenu">
+		<thead>
+			<tr>
+				<th width="150">名称</th>
+				<th width="50">编号</th>
+				<th width="100">类型</th>
+				<th width="120">地址</th>
+				<th width="100">权限标识</th>
+				<th width="100">排序</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<c:forEach items="${list }" var="item" varStatus="itemStatus">
+			<c:if test="${item.parentId==0}">
+			<tr target="params" rel="menuId=${item.menuId }&systemType=${param.systemType}" value="${item.menuId}" nodeHide="false">
+				<td><i  class="fa fa-minus-square-o fa-fw" onclick="nodeHide(this)"></i> ${item.name}</td>
+				<td>${item.menuId}</td>
+				<td>
+					<c:choose>
+						<c:when test="${item.type eq 0}">目录</c:when>
+						<c:when test="${item.type eq 1}">菜单</c:when>
+						<c:otherwise>按钮</c:otherwise>
+					</c:choose>
+				</td>
+				<td>${item.url}</td>
+				<td>${item.perms}</td>
+				<td>${item.orderNum}</td>
+				<td>
+					<c:if test="${item.type!=2}">
+					<a class="button" href="menu/detail?parentId=${item.menuId}&systemType=${param.systemType}" mask="true"
+					   target="dialog" title="新增菜单" width="600"><span>添加子菜单</span></a>
+					</c:if>
+					<a class="button" href="menu/detail?systemType=${param.systemType}&menuId=${item.menuId}" mask="true"
+					   target="dialog" title="编辑菜单" width="600"><span>修改</span></a>
+					<a class="button" href="menu/delete?systemType=${param.systemType}&menuId=${item.menuId}" mask="true"
+					   target="ajaxTodo" title="删除菜单" width="600"><span>删除</span></a>
+				</td>
+			</tr>
+			<c:forEach items="${list}" var="childItem" varStatus="childStatus">
+					<c:if test="${childItem.parentId==item.menuId}">
+						<tr target="params" rel="menuId=${childItem.menuId }&systemType=${param.systemType}" value="${childItem.menuId}"
+							nodeHide="false" class="${item.menuId}">
+							<td style="text-indent:25px;">
+								<c:if test="${childItem.type!=2}"><i class="fa fa-minus-square-o fa-fw" onclick="nodeHide(this)"></i></c:if> ${childItem.name}</td>
+							<td>${childItem.menuId}</td>
+							<td>
+								<c:choose>
+									<c:when test="${childItem.type eq 0}">目录</c:when>
+									<c:when test="${childItem.type eq 1}">菜单</c:when>
+									<c:otherwise>按钮</c:otherwise>
+								</c:choose>
+							</td>
+							<td>${childItem.url}</td>
+							<td>${childItem.perms}</td>
+							<td>${childItem.orderNum}</td>
+							<td>
+								<c:if test="${childItem.type!=2}">
+								<a class="button"
+								   href="menu/detail?parentId=${childItem.menuId}&systemType=${param.systemType}" mask="true"
+								   target="dialog" title="新增菜单" width="600"><span>添加子菜单</span></a>
+								</c:if>
+								<a class="button" href="menu/detail?systemType=${param.systemType}&menuId=${childItem.menuId}"
+								   mask="true"
+								   target="dialog" title="编辑菜单" width="600"><span>修改</span></a>
+								<a class="button" href="menu/delete?systemType=${param.systemType}&menuId=${childItem.menuId}"
+								   mask="true"
+								   target="ajaxTodo" title="删除菜单" width="600"><span>删除</span></a></td>
+						</tr>
+						<c:forEach items="${list}" var="child2Item">
+							<c:if test="${child2Item.parentId==childItem.menuId}">
+								<tr target="params" rel="menuId=${child2Item.menuId }&systemType=${param.systemType}" class="${item.menuId} ${childItem.menuId}" value="${child2Item.menuId}"
+									nodeHide="false">
+									<td style="text-indent:50px;"><c:if test="${child2Item.type!=2}"><i class="fa fa-minus-square-o fa-fw"
+																	 onclick="nodeHide(this)"></i></c:if> ${child2Item.name}</td>
+									<td>${child2Item.menuId}</td>
+									<td>
+										<c:choose>
+											<c:when test="${child2Item.type eq 0}">目录</c:when>
+											<c:when test="${child2Item.type eq 1}">菜单</c:when>
+											<c:otherwise>按钮</c:otherwise>
+										</c:choose>
+									</td>
+									<td>${child2Item.url}</td>
+									<td>${child2Item.perms}</td>
+									<td>${child2Item.orderNum}</td>
+									<td>
+										<c:if test="${child2Item.type!=2}">
+										<a class="button"
+										   href="menu/detail?parentId=${child2Item.menuId}&systemType=${param.systemType}"
+										   mask="true"
+										   target="dialog" title="新增菜单" width="600"><span>添加子菜单</span></a>
+										</c:if>
+										<a class="button"
+										   href="menu/detail?systemType=${param.systemType}&menuId=${child2Item.menuId}"
+										   mask="true"
+										   target="dialog" title="编辑菜单" width="600"><span>修改</span></a>
+										<a class="button"
+										   href="menu/delete?systemType=${param.systemType}&menuId=${child2Item.menuId}"
+										   mask="true"
+										   target="ajaxTodo" title="删除菜单" width="600"><span>删除</span></a></td>
+								</tr>
+								<c:forEach items="${list}" var="child3Item">
+									<c:if test="${child3Item.parentId==child2Item.menuId}">
+										<tr target="params"
+											rel="menuId=${child3Item.menuId }&systemType=${param.systemType}" class="${item.menuId} ${childItem.menuId} ${child2Item.menuId}">
+											<td style="text-indent:75px;">${child3Item.name}</td>
+											<td>${child3Item.menuId}</td>
+											<td>
+												<c:choose>
+													<c:when test="${child3Item.type eq 0}">目录</c:when>
+													<c:when test="${child3Item.type eq 1}">菜单</c:when>
+													<c:otherwise>按钮</c:otherwise>
+												</c:choose>
+											</td>
+											<td>${child3Item.url}</td>
+											<td>${child3Item.perms}</td>
+											<td>${child3Item.orderNum}</td>
+											<td>
+												<a class="button"
+												   href="menu/detail?systemType=${param.systemType}&menuId=${child3Item.menuId}"
+												   mask="true"
+												   target="dialog" title="编辑菜单" width="600"><span>修改</span></a>
+												<a class="button"
+												   href="menu/delete?systemType=${param.systemType}&menuId=${child3Item.menuId}"
+												   mask="true"
+												   target="ajaxTodo" title="删除菜单" width="600"><span>删除</span></a></td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</c:if>
+						</c:forEach>
+					</c:if>
+				</c:forEach>
+			</c:if>
+		</c:forEach>
+		</tbody>
+	</table>
+</div>
+<script>
+	function nodeHide(el) {
+		var $tr = $(el).parents("tr:first");
+		var trClass = $tr.attr("value");
+		var isHidden = $tr.attr("nodeHide");
+		if (isHidden == "true") {
+			$tr.attr("nodeHide", "false");
+			$("." + trClass).show();
+		} else {
+			$tr.attr("nodeHide", "true");
+			$("." + trClass).hide();
+		}
+	}
+</script>

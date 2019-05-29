@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.service.common.mapper.MenuMapper">
+  <resultMap id="menuMap" type="com.system.service.common.domain.MenuVO">
+    <id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="PERMS" jdbcType="VARCHAR" property="perms" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
+    <result column="SYSTEM_TYPE" jdbcType="DECIMAL" property="systemType" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser" />
+    <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+    <result column="UPDATE_USER" jdbcType="TIMESTAMP" property="updateUser" />
+  </resultMap>
+
+  <select id="select" parameterType="com.system.service.common.domain.RoleVO" resultMap="menuMap">
+    select    MENU_ID, NAME, PARENT_ID, URL, PERMS, TYPE, ORDER_NUM, SYSTEM_TYPE, CREATE_TIME,
+    CREATE_USER, UPDATE_TIME, UPDATE_USER
+    from tb_sys_menu
+    <where>
+      <if test="name != null and name!=''">
+        AND NAME = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId != null">
+        AND PARENT_ID = #{parentId,jdbcType=DECIMAL}
+      </if>
+      <if test="perms != null">
+        AND PERMS = #{perms,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        AND TYPE = #{type,jdbcType=DECIMAL}
+      </if>
+      <if test="systemType != null">
+        AND SYSTEM_TYPE = #{systemType,jdbcType=DECIMAL}
+      </if>
+    </where>
+    order by ORDER_NUM
+  </select>
+
+  <select id="selectByMenuId" resultMap="menuMap">
+    select MENU_ID, NAME, PARENT_ID, URL, PERMS, TYPE, ORDER_NUM, SYSTEM_TYPE, CREATE_TIME,
+    CREATE_USER, UPDATE_TIME, UPDATE_USER
+    from TB_SYS_MENU
+    where MENU_ID = #{menuId}
+  </select>
+
+  <select id="selectByMenuName" resultMap="menuMap">
+    select MENU_ID, NAME, PARENT_ID, URL, PERMS, TYPE, ORDER_NUM, SYSTEM_TYPE, CREATE_TIME,
+    CREATE_USER, UPDATE_TIME, UPDATE_USER
+    from TB_SYS_MENU
+    where NAME = #{menuName}
+  </select>
+
+  <select id="judgeMenuExistsByMenuName" resultType="int">
+    select count(*) from TB_SYS_MENU where NAME = #{menuName}
+  </select>
+
+  <select id="selectRoleMenu" resultType="java.util.TreeMap">
+   select case role_id
+        when to_number(#{roleId}) then
+            'true'
+        else
+            'false'
+        end as "checked",m.system_type as "systemType",
+   m.menu_id as "menuId",name as "name",parent_id as "parentId",perms as "perms",type as "type",order_num  as "orderNum" from tb_sys_menu m
+left join tb_sys_role_menu rm on m.menu_id=rm.menu_id and rm.role_id=#{roleId}
+order by m.order_num
+  </select>
+
+
+  <insert id="insert" parameterType="com.system.service.common.domain.MenuVO">
+    <selectKey keyProperty="menuId" order="BEFORE" resultType="string">
+      SELECT seq_sys_menu.nextval menuId from dual
+    </selectKey>
+    insert into TB_SYS_MENU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        MENU_ID,
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="url != null">
+        URL,
+      </if>
+      <if test="perms != null">
+        PERMS,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="orderNum != null">
+        ORDER_NUM,
+      </if>
+      <if test="systemType != null">
+        SYSTEM_TYPE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="updateUser != null">
+        UPDATE_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       #{menuId},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null">
+        #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=DECIMAL},
+      </if>
+      <if test="systemType != null">
+        #{systemType,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+
+  </insert>
+
+  <update id="update" parameterType="com.system.service.common.domain.MenuVO">
+    update TB_SYS_MENU
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNum != null">
+        ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime},
+      </if>
+      <if test="updateUser != null">
+        UPDATE_USER = #{updateUser},
+      </if>
+      <if test="perms != null">
+        PERMS = #{perms},
+      </if>
+    </set>
+    where MENU_ID = #{menuId}
+  </update>
+
+  <delete id="deleteByMenuId" parameterType="string">
+    delete from TB_SYS_MENU
+    where PARENT_ID =#{menuId} OR MENU_ID = #{menuId}
+  </delete>
+
+
+
+</mapper>

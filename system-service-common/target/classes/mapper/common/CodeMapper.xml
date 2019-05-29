@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.service.common.mapper.CodeMapper">
+	<resultMap id="codeMap" type="com.system.service.common.domain.CodeVO">
+		<result column="NO" jdbcType="VARCHAR" property="no"/>
+		<result column="NAME" jdbcType="VARCHAR" property="name"/>
+	</resultMap>
+
+	<select id="selectArea" resultMap="codeMap">
+		select AREA_NO AS NO,AREA_NAME AS NAME from tb_area where status='2'
+	</select>
+
+	<select id="selectRoad" resultMap="codeMap">
+		select road_no AS NO,road_name AS NAME from tb_road
+		where status='2'
+		<if test="areaNo!=null and areaNo!=''">
+			and area_no=#{areaNo,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectStation" resultMap="codeMap">
+		select station_no AS NO,station_name AS NAME from tb_station
+		where status='2'
+		<if test="roadNo!=null and roadNo!=''">
+			and road_no=#{roadNo,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectStationByType" resultMap="codeMap">
+		select station_no AS NO,station_name AS NAME from tb_station
+		where status='2'
+		<if test="roadNo!=null and roadNo!=''">
+			and road_no=#{roadNo,jdbcType=VARCHAR}
+		</if>
+		<if test="type!=null">
+			and type=#{type,jdbcType=DECIMAL}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.service.common.mapper.UserMapper">
+
+    <resultMap id="UserMap" type="com.system.service.common.domain.UserVO">
+        <id column="USER_ID" jdbcType="VARCHAR" property="userId"/>
+        <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName"/>
+        <result column="FULL_NAME" jdbcType="VARCHAR" property="fullName"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="AUTH_TICKET" jdbcType="VARCHAR" property="authTicket"/>
+        <result column="ROAD_NO" jdbcType="VARCHAR" property="roadNo"/>
+        <result column="STATION_NO" jdbcType="VARCHAR" property="stationNo"/>
+        <result column="MOBILE" jdbcType="VARCHAR" property="mobile"/>
+        <result column="STATUS" jdbcType="DECIMAL" property="status"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="CREATE_USER" jdbcType="VARCHAR" property="createUser"/>
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="IS_ADMIN" jdbcType="VARCHAR" property="isAdmin"/>
+        <result column="ROAD_NAME" jdbcType="VARCHAR" property="roadName"/>
+        <result column="STATION_NAME" jdbcType="VARCHAR" property="stationName"/>
+    </resultMap>
+
+
+    <select id="select" parameterType="com.system.service.common.domain.UserVO" resultMap="UserMap">
+      select U.USER_ID, U.LOGIN_NAME, U.FULL_NAME, U.PASSWORD, U.AUTH_TICKET, U.ROAD_NO,U.STATION_NO, U.MOBILE,
+      U.STATUS, U.CREATE_TIME,
+      U.CREATE_USER, U.UPDATE_TIME, U.UPDATE_USER,U.IS_ADMIN,R.ROAD_NAME,S.STATION_NAME
+      from TB_SYS_USER U
+      LEFT JOIN TB_ROAD R ON U.ROAD_NO = R.ROAD_NO
+      LEFT JOIN TB_STATION S ON U.STATION_NO = S.STATION_NO
+      <where>
+      <if test="loginName != null and loginName!=''">
+        AND U.LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+      </if>
+      <if test="fullName != null and fullName!=''">
+          AND U.FULL_NAME = #{fullName,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status!=''">
+       AND U.STATUS = #{status,jdbcType=DECIMAL}
+      </if>
+    </where>
+     order by U.user_id
+  </select>
+
+  <select id="selectByUserId" resultMap="UserMap">
+    select U.USER_ID, U.LOGIN_NAME, U.FULL_NAME, U.PASSWORD, U.AUTH_TICKET, U.ROAD_NO,U.STATION_NO, U.MOBILE, U.STATUS, U.CREATE_TIME,
+    U.CREATE_USER, U.UPDATE_TIME, U.UPDATE_USER,U.IS_ADMIN,R.ROAD_NAME,S.STATION_NAME
+    from TB_SYS_USER U
+    LEFT JOIN TB_ROAD R ON U.ROAD_NO = R.ROAD_NO
+    LEFT JOIN TB_STATION S ON U.STATION_NO = S.STATION_NO
+    where U.USER_ID = #{userId}
+  </select>
+
+  <select id="selectByLoginName" resultMap="UserMap">
+    select U.USER_ID, U.LOGIN_NAME, U.FULL_NAME, U.PASSWORD, U.AUTH_TICKET, U.ROAD_NO,U.STATION_NO, U.MOBILE, U.STATUS, U.CREATE_TIME,
+    U.CREATE_USER, U.UPDATE_TIME, U.UPDATE_USER,U.IS_ADMIN,R.ROAD_NAME,S.STATION_NAME
+    from TB_SYS_USER U
+    LEFT JOIN TB_ROAD R ON U.ROAD_NO = R.ROAD_NO
+    LEFT JOIN TB_STATION S ON U.STATION_NO = S.STATION_NO
+    where U.LOGIN_NAME = #{loginName}
+  </select>
+
+  <select id="judgeUserExistsByLoginName" resultType="int">
+    select count(*) from TB_SYS_USER where LOGIN_NAME = #{loginName}
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" parameterType="com.system.service.common.domain.UserVO">
+      insert into TB_SYS_USER(USER_ID, LOGIN_NAME, FULL_NAME, PASSWORD, AUTH_TICKET, ROAD_NO,STATION_NO, MOBILE, STATUS,
+      CREATE_TIME,CREATE_USER, UPDATE_TIME, UPDATE_USER,IS_ADMIN)
+      VALUES (seq_sys_user.nextval, #{loginName,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{authTicket,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+      #{status,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR},#{isAdmin,jdbcType=VARCHAR},#{roadNo,jdbcType=VARCHAR},
+      #{stationNo,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByUserId" parameterType="com.system.service.common.domain.UserVO">
+    update TB_SYS_USER
+      <set>
+          <if test="loginName != null">
+              LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+          </if>
+          <if test="fullName != null">
+              FULL_NAME = #{fullName,jdbcType=VARCHAR},
+          </if>
+          <if test="password != null">
+              PASSWORD = #{password,jdbcType=VARCHAR},
+          </if>
+          <if test="authTicket != null">
+              AUTH_TICKET = #{authTicket,jdbcType=VARCHAR},
+          </if>
+          <if test="roadNo != null">
+              ROAD_NO = #{roadNo,jdbcType=VARCHAR},
+          </if>
+          <if test="stationNo != null">
+              STATION_NO = #{stationNo,jdbcType=VARCHAR},
+          </if>
+          <if test="mobile != null">
+              MOBILE = #{mobile,jdbcType=VARCHAR},
+          </if>
+          <if test="status != null">
+              STATUS = #{status,jdbcType=DECIMAL},
+          </if>
+          <if test="updateTime != null">
+              UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateUser != null">
+              UPDATE_USER = #{updateUser,jdbcType=VARCHAR},
+          </if>
+          <if test="isAdmin !=null">
+              IS_ADMIN=#{isAdmin,jdbcType=VARCHAR},
+          </if>
+      </set>
+    where USER_ID = #{userId}
+  </update>
+
+  <delete id="deleteByUserId">
+    delete from TB_SYS_USER
+    where user_id = #{userId}
+  </delete>
+
+</mapper>
