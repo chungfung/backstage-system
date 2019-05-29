@@ -29,19 +29,16 @@
 <div class="pageContent">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="user/detail" mask="true"
-                                    target="dialog" title="新增用户" rel="userAdd"  height="400">
+            <li><a class="add" href="user/detail" mask="true" target="dialog" title="新增用户" rel="userAdd"  height="400">
                 <i class="fa fa-plus-square fa-lg fa-fw"></i><label>新增</label></a></li>
-            <li><a class="edit" href="user/detail?userId={userId}" mask="true"
-                                    target="dialog" title="修改用户" rel="userEdit" height="400">
+            <li><a class="edit" href="user/detail?userId={userId}" mask="true" target="dialog" title="修改用户" rel="userEdit" height="400">
                 <i class="fa fa-pencil fa-lg fa-fw"></i><label>修改</label></a></li>
-            <li><a class="delete" href="user/delete?userId={userId}" mask="true"
-                   target="ajaxTodo" title="删除用户" rel="userDelete"><i class="fa fa-trash-o fa-lg fa-fw"></i><label>删除</label></a></li>
-            <li><a class="edit" title="分配角色" href="role/listRole?userId={userId}" mask="true"
-                                    target="dialog" height="500" width="800" rel="roleLoad">
+            <li><a class="delete" href="user/delete?userId={userId}" mask="true" target="ajaxTodo" title="删除用户" rel="userDelete">
+                <i class="fa fa-trash-o fa-lg fa-fw"></i><label>删除</label></a></li>
+            <li><a class="edit" title="分配角色" href="role/listRole?userId={userId}" mask="true" target="dialog" height="500" width="800" rel="roleLoad">
                 <i class="fa fa-cog fa-lg fa-fw"></i><label>分配角色</label></a></li>
-            <li><a class="edit" title="重置密码" href="user/resetPwd?userId={userId}" mask="true"
-                   target="ajaxTodo" ><i class="fa fa-retweet fa-lg fa-fw"></i><label>重置密码</label></a></li>
+            <li><a class="edit" title="重置密码" href="user/resetPwd?userId={userId}" mask="true" target="ajaxTodo" >
+                <i class="fa fa-retweet fa-lg fa-fw"></i><label>重置密码</label></a></li>
 
         </ul>
     </div>
