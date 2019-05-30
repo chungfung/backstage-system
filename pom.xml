@@ -46,21 +46,22 @@
 		<!-- 校验字段规则工具 -->
 		<hibernate-validator.version>5.4.1.Final</hibernate-validator.version>
 		<mybatis-spring-boot-starter.version>1.3.4</mybatis-spring-boot-starter.version>
-		<spring.version>4.3.23.RELEASE</spring.version>
+		<spring.version>5.1.3.RELEASE</spring.version>
 		<pagehelper.boot.version>1.2.5</pagehelper.boot.version>
+		<commons.io.version>2.5</commons.io.version>
+		<commons-lang3.version>3.8</commons-lang3.version>
+		<commons.fileupload.version>1.3.3</commons.fileupload.version>
+		<bitwalker.version>1.19</bitwalker.version>
+		<oshi.version>3.9.1</oshi.version>
+		<jsoup.version>1.11.3</jsoup.version>
+		<easypoi.version>3.0.3</easypoi.version>
+		<validation-api.version>2.0.1.Final</validation-api.version>
 
 		<!-- ********************************** -->
 
 		<!-- shiro安全认证 -->
 		<mybatis.boot.version>1.3.2</mybatis.boot.version>
-		<bitwalker.version>1.19</bitwalker.version>
 		<swagger.version>2.7.0</swagger.version>
-		<oshi.version>3.9.1</oshi.version>
-		<commons.io.version>2.5</commons.io.version>
-		<commons-lang3.version>3.8</commons-lang3.version>
-		<commons.fileupload.version>1.3.3</commons.fileupload.version>
-		<jsoup.version>1.11.3</jsoup.version>
-		<easypoi.version>3.0.3</easypoi.version>
 		<velocity.version>1.7</velocity.version>
 
 		<xxl-rpc.version>1.4.0</xxl-rpc.version>
@@ -192,22 +193,6 @@
 				<version>${pagehelper.boot.version}</version>
 			</dependency>
 
-			<!-- ********************************** -->
-
-			<!-- 解析客户端操作系统、浏览器等 -->
-			<dependency>
-				<groupId>eu.bitwalker</groupId>
-				<artifactId>UserAgentUtils</artifactId>
-				<version>${bitwalker.version}</version>
-			</dependency>
-
-			<!-- 获取系统信息 -->
-			<dependency>
-				<groupId>com.github.oshi</groupId>
-				<artifactId>oshi-core</artifactId>
-				<version>${oshi.version}</version>
-			</dependency>
-
 			<!--io常用工具类 -->
 			<dependency>
 				<groupId>commons-io</groupId>
@@ -226,6 +211,20 @@
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>${commons.fileupload.version}</version>
+			</dependency>
+
+			<!-- 解析客户端操作系统、浏览器等 -->
+			<dependency>
+				<groupId>eu.bitwalker</groupId>
+				<artifactId>UserAgentUtils</artifactId>
+				<version>${bitwalker.version}</version>
+			</dependency>
+
+			<!-- 获取系统信息 -->
+			<dependency>
+				<groupId>com.github.oshi</groupId>
+				<artifactId>oshi-core</artifactId>
+				<version>${oshi.version}</version>
 			</dependency>
 
 			<!-- HTML解析器 -->
@@ -253,6 +252,14 @@
 				<artifactId>easypoi-base</artifactId>
 				<version>${easypoi.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation-api.version}</version>
+			</dependency>
+
+			<!-- ********************************** -->
 
 			<!-- 核心模块-->
 			<dependency>
