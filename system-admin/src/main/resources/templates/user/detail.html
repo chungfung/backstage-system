@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
-<form method="post"
-	  th:action="@{user/save}" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone);">
+<form method="post" th:action="@{user/save}" class="pageForm required-validate"
+	  onsubmit="return validateCallback(this,dialogAjaxDone);">
+
 	<div class="pageFormContent" layoutH="56">
 		<input type="hidden" name="userId" th:value="${detail?.userId}">
 		<dl>
