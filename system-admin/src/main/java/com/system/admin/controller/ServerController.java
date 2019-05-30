@@ -5,12 +5,14 @@ import com.system.framework.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 服务器监控
  * @author system
  */
 @Controller
+@RequestMapping("monitor")
 public class ServerController extends BaseController {
 
     @GetMapping("/server")
