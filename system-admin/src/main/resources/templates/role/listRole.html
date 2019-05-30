@@ -3,11 +3,11 @@
 <div class="pageHeader">
 	<form onsubmit="return dialogSearch(this);" th:action="@{role/listRole}" method="post">
 	<div class="searchBar">
-		<input name="userId" type="hidden" th:value="${userId}"/>
+		<input name="userId" type="hidden" th:value="${param.userId}"/>
 		<table class="searchContent">
 			<tr>
 				<td>
-					角色名称：<input type="text" name="roleName" th:value="${roleName}"/>
+					角色名称：<input type="text" name="roleName" th:value="${param.roleName}"/>
 				</td>
 			</tr>
 		</table>
@@ -38,7 +38,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="item: ${list}" th:attr="rel='${item.roleId }'">
+			<tr th:each="item: ${list}" th:attr="rel=${item.roleId }">
 				<td><input name="roleIds" type="checkbox" th:value="${item.roleId }" th:checked="${item.checked eq 'true'?true:false}"></td>
 				<td th:text="${item.roleName}"></td>
 				<td th:text="${item.roleRemark}"></td>

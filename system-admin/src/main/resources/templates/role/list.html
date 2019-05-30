@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="zh" xmlns:th="http://www.thymeleaf.org">
 
-<form id="pagerForm" method="post" th:action="@{role/list}">
+<form id="pagerForm" method="post" th:action="@{user/list}">
 	<input type="hidden" name="pageNum" th:value="${pageBean.pageNum}" />
 	<input type="hidden" name="numPerPage" th:value="${pageBean.pageSize}" />
 </form>
@@ -58,13 +58,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr target="roleId" th:each="item:${pageBean.list}" th:attr="rel='${item.roleId }'">
+			<tr target="roleId" th:attr="rel=${item.roleId}" th:each="item: ${pageBean.list}">
 				<td th:text="${item.roleName}"></td>
 				<td th:text="${item.roleRemark}"></td>
 				<td th:text="${item.createUser}"></td>
-				<td th:text="${#dates.format(item.createTime,'YYYY-MM-DD hh:mm:ss')}" />"></td>
+				<td th:text="${#dates.format(item.createTime,'YYYY-MM-DD hh:mm:ss')}" /></td>
 				<td th:text="${item.updateUser}"></td>
-				<td th:text="${#dates.format(item.updateTime,'YYYY-MM-DD hh:mm:ss')}" />"></td>
+				<td th:text="${#dates.format(item.updateTime,'YYYY-MM-DD hh:mm:ss')}" /></td>
 			</tr>
 		</tbody>
 	</table>
@@ -81,7 +81,7 @@
 		</div>
 
 		<div class="pagination" targetType="navTab"
-			 th:attr="totalCount='${pageBean.total}',numPerPage='${pageBean.pageSize}',currentPage='${pageBean.pageNum }'" pageNumShown="10" ></div>
+			 th:attr="totalCount=${pageBean.total},numPerPage=${pageBean.pageSize},currentPage=${pageBean.pageNum }" pageNumShown="10" ></div>
 
 	</div>
 </div>
