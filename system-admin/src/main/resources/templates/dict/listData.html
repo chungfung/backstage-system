@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<form id="pagerForm" method="post" th:action="@{dict/list_data}">
+    <input type="hidden" name="pageNum" th:value="${pageBean.pageNum}" />
+    <input type="hidden" name="numPerPage" th:value="${pageBean.pageSize}" />
+</form>
+
+<div class="pageHeader">
+    <form onsubmit="return navTabSearch(this);" th:action="@{dict/list_type}" method="post">
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td>
+                        字典标签：
+                        <input type="text" name="dictLabel" th:value="${param.dictLabel}" class="textInput">
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" onclick="resetAll(this)">清空重输</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><a class="add" href="#" mask="true" target="dialog" title="新增" rel="listDataAdd"  height="400">
+                <i class="fa fa-plus-square fa-lg fa-fw"></i><label>新增</label></a></li>
+        </ul>
+    </div>
+    <table class="list" width="100%" layoutH="115">
+        <thead>
+        <tr>
+            <th width="50">主键</th>
+            <th width="100">字典标签</th>
+            <th width="100">字典键值</th>
+            <th width="100">字典顺序</th>
+            <th width="100">状态</th>
+            <th width="100">备注</th>
+            <th width="100">创建时间</th>
+            <th width="80">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr target="userId" th:attr="rel=${item.id}" th:each="item: ${pageBean.list}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.dictLabel}"></td>
+                <td th:text="${item.dictValue}"></td>
+                <td th:text="${item.dictSort}"></td>
+                <td th:text="${item.status}"></td>
+                <td th:text="${item.remark}"></td>
+                <td th:text="${item.createTime}"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="panelBar">
+        <div class="pages">
+            <span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option value="20" th:selected="${pageBean.pageSize == 20?true:false}">20</option>
+                <option value="50" th:selected="${pageBean.pageSize == 50?true:false}">50</option>
+                <option value="100" th:selected="${pageBean.pageSize == 100?true:false}">100</option>
+                <option value="200" th:selected="${pageBean.pageSize == 200?true:false}">200</option>
+            </select>
+            <span th:text="'条，共' + ${pageBean.total} + '条'"></span>
+        </div>
+
+        <div class="pagination" targetType="navTab"
+             th:attr="totalCount=${pageBean.total},numPerPage=${pageBean.pageSize},currentPage=${pageBean.pageNum }" pageNumShown="10" ></div>
+
+    </div>
+</div>
+</html>
