@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("monitor")
 public class ServerController extends BaseController {
 
+    private static final String MONITOR_SERVER_VIEW = "monitor/server";
+
     @GetMapping("/server")
     public String server(ModelMap map) throws Exception {
         Server server = new Server();
         server.copyTo();
         map.put("server", server);
-        return "server";
+        return MONITOR_SERVER_VIEW;
     }
 }
