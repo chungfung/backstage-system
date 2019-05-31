@@ -11,5 +11,4 @@ public class SystemAdminApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SystemAdminApplication.class, args);
 	}
-
 }

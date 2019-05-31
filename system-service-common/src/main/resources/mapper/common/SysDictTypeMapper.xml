@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.service.common.mapper.SysDictTypeMapper">
+
+	<resultMap id="SysDictTypeBaseResultMap" type="com.system.service.common.domain.SysDictTypeVO">
+		<id column="ID" jdbcType="DECIMAL" property="id"/>
+		<result column="DICT_NAME" jdbcType="VARCHAR" property="dictName"/>
+		<result column="DICT_TYPE" jdbcType="VARCHAR" property="dictType"/>
+		<result column="STATUS" jdbcType="VARCHAR" property="status"/>
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+		<result column="CREATE_USER" jdbcType="VARCHAR" property="createUser"/>
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+		<result column="UPDATE_USER" jdbcType="VARCHAR" property="updateUser"/>
+		<result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+	</resultMap>
+
+	<select id="selectDictTypeList" parameterType="com.system.service.common.domain.SysDictTypeVO" 
+			resultMap="SysDictTypeBaseResultMap">
+		SELECT ID, DICT_NAME, DICT_TYPE, STATUS, CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER,REMARK
+		FROM TB_SYS_DICT_TYPE
+		<where>
+			<if test="dictName != null and dictName != ''">
+				AND dict_name like concat('%', #{dictName}, '%')
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="dictType != null and dictType != ''">
+				AND dict_type like concat('%', #{dictType}, '%')
+			</if>
+		</where>
+	</select>
+
+	<select id="selectDictTypeAll" resultMap="SysDictTypeBaseResultMap">
+		SELECT ID, DICT_NAME, DICT_TYPE, STATUS, CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER, REMARK
+		FROM TB_SYS_DICT_TYPE
+	</select>
+
+	<select id="selectDictTypeById" parameterType="Long" resultMap="SysDictTypeBaseResultMap">
+		SELECT ID, DICT_NAME, DICT_TYPE, STATUS, CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER, REMARK
+		FROM TB_SYS_DICT_TYPE
+		WHERE ID = #{id}
+	</select>
+
+	<select id="checkDictTypeUnique" parameterType="String" resultMap="SysDictTypeBaseResultMap">
+		SELECT ID, DICT_NAME, DICT_TYPE, STATUS, CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER, REMARK
+		FROM TB_SYS_DICT_TYPE
+		where DICT_TYPE = #{dictType}
+	</select>
+
+	<delete id="deleteDictTypeById" parameterType="Long">
+   	 	DELETE FROM TB_SYS_DICT_TYPE WHERE ID = #{id}
+  </delete>
+
+	<delete id="deleteDictTypeByIds" parameterType="Long">
+		DELETE FROM TB_SYS_DICT_TYPE WHERE ID IN
+		<foreach collection="array" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<update id="updateDictType" parameterType="com.system.service.common.domain.SysDictTypeVO">
+		UPDATE TB_SYS_DICT_TYPE
+		<set>
+			<if test="dictName != null and dictName != ''">dict_name = #{dictName},</if>
+			<if test="dictType != null and dictType != ''">dict_type = #{dictType},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="remark != null">remark = #{remark},</if>
+			<if test="updateUser != null and updateUser != ''">update_user = #{updateUser},</if>
+			update_time = sysdate
+		</set>
+		WHERE Id = #{id}
+	</update>
+
+	<insert id="insertDictType" parameterType="com.system.service.common.domain.SysDictTypeVO">
+		INSERT INTO SYS_DICT_TYPE(
+			<if test="dictName != null and dictName != ''">DICT_NAME,</if>
+			<if test="dictType != null and dictType != ''">DICT_TYPE,</if>
+			<if test="status != null">STATUS,</if>
+			<if test="remark != null and remark != ''">REMARK,</if>
+			<if test="createUser != null and createUser != ''">CREATE_USER,</if>
+			CREATE_TIME
+		)VALUES(
+			<if test="dictName != null and dictName != ''">#{dictName},</if>
+			<if test="dictType != null and dictType != ''">#{dictType},</if>
+			<if test="status != null">#{status},</if>
+			<if test="remark != null and remark != ''">#{remark},</if>
+			<if test="createUser != null and createUser != ''">#{createUser},</if>
+			SYSDATE
+		)
+	</insert>
+</mapper>
