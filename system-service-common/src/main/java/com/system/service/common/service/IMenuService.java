@@ -4,6 +4,7 @@ import com.system.service.common.domain.MenuVO;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Author: cw
@@ -24,4 +25,5 @@ public interface IMenuService {
 
     MenuVO queryByName(String name);
 
+    Set<String> queryPermsByUserId(String userId);
 }

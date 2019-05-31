@@ -24,4 +24,12 @@ public interface RoleMapper {
 
     int judgeRoleExistsByRoleName(@Param("roleName") String roleName);
 
+    /**
+     * 通过用户名获取角色列表
+     *
+     * @param userId
+     * @return
+     */
+    List<RoleVO> selectRolesByUserId(@Param("userId") String userId);
+
 }

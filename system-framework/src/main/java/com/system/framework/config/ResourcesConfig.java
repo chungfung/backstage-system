@@ -37,5 +37,7 @@ public class ResourcesConfig implements WebMvcConfigurer {
         /** swagger配置 */
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        /** 静态资源映射地址 */
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 }

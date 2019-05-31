@@ -70,6 +70,21 @@
     order by r.role_id
   </select>
 
+    <select id="selectRolesByUserId" resultMap="roleMap">
+        select T1.role_id,
+        T1.role_name,
+        T1.status,
+        T1.role_remark,
+        T1.create_time,
+        T1.create_user,
+        T1.update_time,
+        T1.update_user
+        from tb_sys_role t1
+        inner join tb_sys_user_role t2 on T1.ROLE_ID = T2.ROLE_ID
+        inner join tb_sys_user t3 on t2.user_id = t3.user_id
+        where t3.status='1' and t3.user_id = #{userId}
+    </select>
+
   <insert id="insert" parameterType="com.system.service.common.domain.RoleVO">
     <selectKey keyProperty="roleId" order="BEFORE" resultType="string">
       SELECT seq_sys_role.nextval userId from dual

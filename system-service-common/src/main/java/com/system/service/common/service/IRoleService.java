@@ -6,6 +6,7 @@ import com.system.service.common.domain.RoleVO;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Author: 丰涌
@@ -25,4 +26,6 @@ public interface IRoleService {
     String delete(String roleId);
 
     List<Map<String,Object>> queryUserRole(String userId, RoleVO roleVO);
+
+    Set<String> queryRoleKeys(String userId);
 }

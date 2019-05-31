@@ -70,6 +70,19 @@ left join tb_sys_role_menu rm on m.menu_id=rm.menu_id and rm.role_id=#{roleId}
 order by m.order_num
   </select>
 
+    <select id="selectMenusByUserId" resultMap="menuMap">
+        select T1.MENU_ID, T1.NAME, T1.PARENT_ID, T1.URL, T1.PERMS, T1.TYPE, T1.ORDER_NUM,
+        T1.SYSTEM_TYPE, T1.CREATE_TIME,
+        T1.CREATE_USER, T1.UPDATE_TIME, T1.UPDATE_USER
+        from tb_sys_menu t1
+        inner join tb_sys_role_menu t2 on T1.MENU_ID = T2.MENU_ID
+        inner join tb_sys_user_role t3 on t2.role_id = t3.role_id
+        inner join tb_sys_user t4 on t3.user_id = t4.user_id
+        <where>
+            t4.status='1' and t4.user_id = #{userId}
+        </where>
+    </select>
+
 
   <insert id="insert" parameterType="com.system.service.common.domain.MenuVO">
     <selectKey keyProperty="menuId" order="BEFORE" resultType="string">

@@ -1,179 +1,165 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <div class="pageContent">
-	<form method="post" layoutH="10"  action="role/setMenu" class="pageForm" onsubmit="return validateCallback(this,dialogAjaxDone)">
-		<input type="hidden" name="roleId" value="${param.roleId}" id="roleId" />
+	<form method="post" layoutH="10"  th:action="@{role/setMenu}" class="pageForm" onsubmit="return validateCallback(this,dialogAjaxDone)">
+		<input type="hidden" name="roleId" th:value="${param.roleId}" id="roleId" />
 		<input type="hidden" name="menuIds" id="menuIds"/>
 		<input type="hidden" name="systemType" id="systemType"/>
-		<input type="hidden"  id="menus" value="${menus}"/>
+		<input type="hidden"  id="menus" th:value="${menus}"/>
 		<ul class="tree expand" layoutH="48" id="menuTree">
 			<li id="system_clear"><a tname="name" tvalue="systemType" >前台结算管理系统</a>
-				<ul>
-					<c:forEach items="${menus}" var="item" varStatus="status">
-						<c:if test="${item.parentId==0 and item.systemType==1}">
-							<li id="${item.menuId}">
-								<label><input type="checkbox" <c:if test="${item.checked=='true'}">class="checked"  checked</c:if>  name="menuId" value="${item.menuId}"/>${item.name}</label>
-								<ul>
-									<c:forEach items="${menus}" var="childTime" varStatus="childStatus">
-										<c:if test="${childTime.parentId==item.menuId }">
-											<li id="${childTime.menuId}_${item.menuId}">
-												<label><input  type="checkbox" name="menuId" value="${childTime.menuId}"<c:if test="${childTime.checked=='true'}">class="checked"  checked</c:if>/>${childTime.name}</label>
-												<ul>
-													<c:forEach items="${menus}" var="child2Time" varStatus="child2Status">
-														<c:if test="${child2Time.parentId==childTime.menuId}">
-															<li  id="${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-																<label><input type="checkbox" name="menuId"  value="${child2Time.menuId}" <c:if test="${child2Time.checked=='true'}">class="checked" checked</c:if>/>${child2Time.name}</label>
-																<ul>
-																	<c:forEach items="${menus}" var="child3Time">
-																		<c:if test="${child3Time.parentId==child2Time.menuId}">
-																			<li id="${child3Time.menuId}_${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-																				<label><input type="checkbox" name="menuId" value="${child3Time.menuId}"
-																							  <c:if test="${child3Time.checked=='true'}">class="checked" checked</c:if>/>
-																							  ${child3Time.name}
-																				</label>
-																			</li>
-																		</c:if>
-																	</c:forEach>
-																</ul>
-															</li>
-														</c:if>
-													</c:forEach>
-												</ul>
-											</li>
-										</c:if>
-									</c:forEach>
-								</ul>
-							</li>
-						</c:if>
-					</c:forEach>
+				<ul th:each="item:${menus}">
+                    <li th:attr="id=${item.menuId}" th:if="${item.parentId==0 and item.systemType==1}">
+                        <label>
+                            <input type="checkbox" th:class="${item.checked=='true'?'checked':''}" name="menuId" th:value="${item.menuId}"
+                                   th:text=" ${item.name}"/>
+                        </label>
+                        <ul th:each="childTime:${menus}">
+                            <li th:attr="id=${childTime.menuId}+'_'+${item.menuId}" th:if="${childTime.parentId==item.menuId}">
+                                <label>
+                                    <input type="checkbox" name="menuId" th:value="${childTime.menuId}"
+                                           th:text=" ${childTime.name}" th:class="${childTime.checked=='true'?'checked':''}"/>
+                                </label>
+                                <ul th:each="child2Time:${menus}">
+                                    <li th:attr="id=${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}" th:if="${child2Time.parentId==childTime.menuId}">
+                                        <label>
+                                            <input type="checkbox" name="menuId" th:value="${child2Time.menuId}"
+                                                   th:text=" ${child2Time.name}" th:class="${child2Time.checked=='true'?'checked':''}"/>
+                                        </label>
+                                        <ul th:each="child3Time:${menus}">
+                                            <li th:attr="id=${child3Time.menuId}+'_'+${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}"
+                                                th:if="${child3Time.parentId==child2Time.menuId}">
+                                                <label>
+                                                    <input type="checkbox" name="menuId" th:value="${child3Time.menuId}"
+                                                           th:text=" ${child3Time.name}" th:class="${child3Time.checked=='true'?'checked':''}"/>
+                                                </label>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
 				</ul>
 			</li>
 			<li id="system_charge"><a tname="name" tvalue="systemType" >收费管理系统</a>
-				<ul>
-					<c:forEach items="${menus}" var="item" varStatus="status">
-						<c:if test="${item.parentId==0 and item.systemType==2}">
-							<li id="${item.menuId}">
-								<label><input type="checkbox" <c:if test="${item.checked=='true'}">class="checked"  checked</c:if>  name="menuId" value="${item.menuId}"/>${item.name}</label>
-								<ul>
-									<c:forEach items="${menus}" var="childTime" varStatus="childStatus">
-										<c:if test="${childTime.parentId==item.menuId }">
-											<li id="${childTime.menuId}_${item.menuId}">
-												<label><input  type="checkbox" name="menuId" value="${childTime.menuId}"<c:if test="${childTime.checked=='true'}">class="checked"  checked</c:if>/>${childTime.name}</label>
-												<ul>
-													<c:forEach items="${menus}" var="child2Time" varStatus="child2Status">
-														<c:if test="${child2Time.parentId==childTime.menuId}">
-															<li  id="${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-																<label><input type="checkbox" name="menuId"  value="${child2Time.menuId}" <c:if test="${child2Time.checked=='true'}">class="checked" checked</c:if>/>${child2Time.name}</label>
-																<ul>
-																	<c:forEach items="${menus}" var="child3Time">
-																		<c:if test="${child3Time.parentId==child2Time.menuId}">
-																			<li id="${child3Time.menuId}_${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-																				<label><input type="checkbox"
-																							  name="menuId"
-																							  value="${child3Time.menuId}"
-																							  <c:if test="${child3Time.checked=='true'}">class="checked"
-																							  checked</c:if>/>${child3Time.name}
-																				</label>
-																			</li>
-																		</c:if>
-																	</c:forEach>
-																</ul>
-															</li>
-														</c:if>
-													</c:forEach>
-												</ul>
-											</li>
-										</c:if>
-									</c:forEach>
-								</ul>
-							</li>
-						</c:if>
-					</c:forEach>
-				</ul>
+                <ul th:each="item:${menus}">
+                    <li th:attr="id=${item.menuId}" th:if="${item.parentId==0 and item.systemType==2}">
+                        <label>
+                            <input type="checkbox" th:class="${item.checked=='true'?'checked':''}" name="menuId"
+                                   th:value="${item.menuId}" th:text=" ${item.name}"/>
+                        </label>
+                        <ul th:each="childTime:${menus}">
+                            <li th:attr="id=${childTime.menuId}+'_'+${item.menuId}"
+                                th:if="${childTime.parentId==item.menuId}">
+                                <label>
+                                    <input type="checkbox" name="menuId" th:value="${childTime.menuId}"
+                                           th:class="${childTime.checked=='true'?'checked':''}" th:text=" ${childTime.name}"/>
+                                </label>
+                                <ul th:each="child2Time:${menus}">
+                                    <li th:attr="id=${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}"
+                                        th:if="${child2Time.parentId==childTime.menuId}">
+                                        <label>
+                                            <input type="checkbox" name="menuId" th:value="${child2Time.menuId}"
+                                                   th:class="${child2Time.checked=='true'?'checked':''}" th:text=" ${child2Time.name}"/>
+                                        </label>
+                                        <ul th:each="child3Time:${menus}">
+                                            <li th:attr="id=${child3Time.menuId}+'_'+${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}"
+                                                th:if="${child3Time.parentId==child2Time.menuId}">
+                                                <label>
+                                                    <input type="checkbox" name="menuId" th:value="${child3Time.menuId}"
+                                                           th:class="${child3Time.checked=='true'?'checked':''}" th:text=" ${child3Time.name}"/>
+                                                </label>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
 			</li>
 			<li id="system_message"><a tname="name" tvalue="systemType" >数据传输监控系统</a>
-				<ul>
-					<c:forEach items="${menus}" var="item" varStatus="status">
-						<c:if test="${item.parentId==0 and item.systemType==3}">
-							<li id="${item.menuId}">
-								<label><input type="checkbox" <c:if test="${item.checked=='true'}">class="checked"  checked</c:if>  name="menuId" value="${item.menuId}"/>${item.name}</label>
-								<ul>
-									<c:forEach items="${menus}" var="childTime" varStatus="childStatus">
-										<c:if test="${childTime.parentId==item.menuId }">
-											<li id="${childTime.menuId}_${item.menuId}">
-												<label><input  type="checkbox" name="menuId" value="${childTime.menuId}"<c:if test="${childTime.checked=='true'}">class="checked"  checked</c:if>/>${childTime.name}</label>
-												<ul>
-													<c:forEach items="${menus}" var="child2Time" varStatus="child2Status">
-														<c:if test="${child2Time.parentId==childTime.menuId}">
-															<li  id="${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-																<label><input type="checkbox" name="menuId"  value="${child2Time.menuId}" <c:if test="${child2Time.checked=='true'}">class="checked" checked</c:if>/>${child2Time.name}</label>
-																<ul>
-																	<c:forEach items="${menus}" var="child3Time">
-																		<c:if test="${child3Time.parentId==child2Time.menuId}">
-																			<li id="${child3Time.menuId}_${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-																				<label><input type="checkbox"
-																							  name="menuId"
-																							  value="${child3Time.menuId}"
-																							  <c:if test="${child3Time.checked=='true'}">class="checked"
-																							  checked</c:if>/>${child3Time.name}
-																				</label>
-																			</li>
-																		</c:if>
-																	</c:forEach>
-																</ul>
-															</li>
-														</c:if>
-													</c:forEach>
-												</ul>
-											</li>
-										</c:if>
-									</c:forEach>
-								</ul>
-							</li>
-						</c:if>
-					</c:forEach>
-				</ul>
+                <ul th:each="item:${menus}">
+                    <li th:attr="id=${item.menuId}" th:if="${item.parentId==0 and item.systemType==3}">
+                        <label>
+                            <input type="checkbox" th:class="${item.checked=='true'?'checked':''}" name="menuId"
+                                   th:value="${item.menuId}" th:text=" ${item.name}"/>
+                        </label>
+                        <ul th:each="childTime:${menus}">
+                            <li th:attr="id=${childTime.menuId}+'_'+${item.menuId}"
+                                th:if="${childTime.parentId==item.menuId}">
+                                <label>
+                                    <input type="checkbox" name="menuId" th:value="${childTime.menuId}"
+                                           th:class="${childTime.checked=='true'?'checked':''}" th:text=" ${childTime.name}"/>
+                                </label>
+                                <ul th:each="child2Time:${menus}">
+                                    <li th:attr="id=${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}"
+                                        th:if="${child2Time.parentId==childTime.menuId}">
+                                        <label>
+                                            <input type="checkbox" name="menuId" th:value="${child2Time.menuId}"
+                                                   th:class="${child2Time.checked=='true'?'checked':''}" th:text=" ${child2Time.name}"/>
+                                        </label>
+                                        <ul th:each="child3Time:${menus}">
+                                            <li th:attr="id=${child3Time.menuId}+'_'+${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}"
+                                                th:if="${child3Time.parentId==child2Time.menuId}">
+                                                <label>
+                                                    <input type="checkbox" name="menuId" th:value="${child3Time.menuId}"
+                                                           th:class="${child3Time.checked=='true'?'checked':''}" th:text=" ${child3Time.name}"/>
+                                                </label>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
 			</li>
 			<li id="system_user"><a tname="systemType" tvalue="" >用户管理系统</a>
-				<ul>
-					<c:forEach items="${menus}" var="item" varStatus="status">
-						<c:if test="${item.parentId==0 and item.systemType==4}">
-					<li id="${item.menuId}">
-						<label><input type="checkbox" <c:if test="${item.checked=='true'}">class="checked"  checked</c:if>  name="menuId" value="${item.menuId}"/>${item.name}</label>
-						<ul>
-							<c:forEach items="${menus}" var="childTime" varStatus="childStatus">
-								<c:if test="${childTime.parentId==item.menuId }">
-							<li id="${childTime.menuId}_${item.menuId}">
-								<label><input  type="checkbox" name="menuId" value="${childTime.menuId}"<c:if test="${childTime.checked=='true'}">class="checked"  checked</c:if>/>${childTime.name}</label>
-								<ul>
-									<c:forEach items="${menus}" var="child2Time" varStatus="child2Status">
-										<c:if test="${child2Time.parentId==childTime.menuId}">
-									<li  id="${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-										<label><input type="checkbox" name="menuId"  value="${child2Time.menuId}" <c:if test="${child2Time.checked=='true'}">class="checked" checked</c:if>/>${child2Time.name}</label>
-										<ul>
-											<c:forEach items="${menus}" var="child3Time">
-												<c:if test="${child3Time.parentId==child2Time.menuId}">
-													<li id="${child3Time.menuId}_${child2Time.menuId}_${childTime.menuId}_${item.menuId}">
-														<label><input type="checkbox" name="menuId"
-																	  value="${child3Time.menuId}"
-																	  <c:if test="${child3Time.checked=='true'}">class="checked"
-																	  checked</c:if>/>${child3Time.name}</label>
-													</li>
-												</c:if>
-											</c:forEach>
-										</ul>
-									</li>
-										</c:if>
-									</c:forEach>
-								</ul>
-							</li>
-							</c:if>
-							</c:forEach>
-						</ul>
-					</li>
-					</c:if>
-					</c:forEach>
-				</ul>
+                <ul th:each="item:${menus}">
+                    <li th:attr="id=${item.menuId}" th:if="${item.parentId==0 and item.systemType==4}">
+                        <label th:text=" ${item.name}">
+                            <input type="checkbox" th:class="${item.checked=='true'?'checked':''}" name="menuId"
+                                   th:value="${item.menuId}"/>
+                        </label>
+                        <ul th:each="childTime:${menus}">
+                            <li th:attr="id=${childTime.menuId}+'_'+${item.menuId}"
+                                th:if="${childTime.parentId==item.menuId}">
+                                <label>
+                                    <input type="checkbox" name="menuId" th:value="${childTime.menuId}"
+                                           th:class="${childTime.checked=='true'?'checked':''}" th:text=" ${childTime.name}"/>
+                                </label>
+                                <ul th:each="child2Time:${menus}">
+                                    <li th:attr="id=${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}"
+                                        th:if="${child2Time.parentId==childTime.menuId}">
+                                        <label>
+                                            <input type="checkbox" name="menuId" th:value="${child2Time.menuId}"
+                                                   th:class="${child2Time.checked=='true'?'checked':''}" th:text=" ${child2Time.name}"/>
+                                        </label>
+                                        <ul th:each="child3Time:${menus}">
+                                            <li th:attr="id=${child3Time.menuId}+'_'+${child2Time.menuId}+'_'+${childTime.menuId}+'_'+${item.menuId}"
+                                                th:if="${child3Time.parentId==child2Time.menuId}">
+                                                <label>
+                                                    <input type="checkbox" name="menuId" th:value="${child3Time.menuId}"
+                                                           th:class="${child3Time.checked=='true'?'checked':''}" th:text=" ${child3Time.name}"/>
+                                                </label>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
 			</li>
 		</ul>
 		<div class="formBar">
@@ -184,10 +170,9 @@
 		</div>
 	</form>
 </div>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 	$(function(){
 		var menus = $("#menus").val();
-		console.log(DWZ.jsonEval(menus));
 		$("input").click(function(event){
 			var checked = $(this).is(':checked');
 			var $li = $(this).parents("li:first");
@@ -226,3 +211,4 @@
 		});
 	});
 </script>
+</html>

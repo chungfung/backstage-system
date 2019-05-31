@@ -3,6 +3,7 @@ package com.system.service.common.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.system.common.page.PageBean;
 import com.system.common.page.PageParam;
+import com.system.common.utils.StringUtils;
 import com.system.service.common.domain.RoleVO;
 import com.system.service.common.mapper.RoleMapper;
 import com.system.service.common.service.IRoleService;
@@ -10,11 +11,8 @@ import com.system.service.common.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: 丰涌
@@ -65,6 +63,18 @@ public class RoleServiceImpl implements IRoleService {
     public List<Map<String, Object>> queryUserRole(String userId,RoleVO roleVO) {
         List<Map<String,Object>> list = roleMapper.selectUserRole(userId,roleVO);
         return list;
+    }
+
+    @Override
+    public Set<String> queryRoleKeys(String userId) {
+        List<RoleVO> perms =  roleMapper.selectRolesByUserId(userId);
+        Set<String> permsSet = new HashSet<>();
+        for (RoleVO perm : perms) {
+            if (StringUtils.isNotNull(perm)) {
+                permsSet.addAll(Arrays.asList(perm.getRoleName().trim().split(",")));
+            }
+        }
+        return permsSet;
     }
 
     @Override
