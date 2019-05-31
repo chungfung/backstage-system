@@ -230,7 +230,7 @@ a:hover {text-decoration:underline;}
 .accordion .accordionHeader.hover { background-position:0 -25px;}
 .accordion .accordionHeader h2 { background-repeat:no-repeat; background-position:100% -50px;}
 .accordion .accordionHeader.hover h2 { background-position:100% -75px;}
-.accordion .accordionHeader .collapsable { background-position:100% -100px;}
+.accordion .accordionHeader .collapsable { background-position:100% -100px;font-weight: 600;}
 .accordion .accordionHeader.hover .collapsable { background-position:100% -125px;}
 .accordion .accordionHeader h2 span { background-position:0 -150px;}
 

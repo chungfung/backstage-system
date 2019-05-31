@@ -1,8 +1,8 @@
 DROP INDEX "IDX_SYS_DICT_TYPE";
 
 DROP TABLE "TB_SYS_DICT_TYPE" CASCADE CONSTRAINTS;
-
 DROP TABLE "TB_SYS_DICT_DATA" CASCADE CONSTRAINTS;
+DROP TABLE "TB_SYS_OPER_LOG" CASCADE CONSTRAINTS;
 
 /*==============================================================*/
 /* Table: "TB_SYS_DICT_TYPE"                                    */
@@ -83,3 +83,36 @@ COMMENT ON COLUMN "TB_SYS_DICT_DATA"."UPDATE_TIME" IS
 
 COMMENT ON COLUMN "TB_SYS_DICT_DATA"."UPDATE_USER" IS
 '修改人';
+
+/*==============================================================*/
+/* Table: "TB_SYS_OPER_LOG"                                     */
+/*==============================================================*/
+CREATE TABLE "TB_SYS_OPER_LOG"
+(
+   "ID"                 NUMBER(19)           NOT NULL,
+   "TITLE"              VARCHAR2(50),
+   "BUSINESS_TYPE"      NUMBER(2),
+   "METHOD"             VARCHAR2(100),
+   "OPERATOR_TYPE"      NUMBER(1),
+   "OPER_NAME"          VARCHAR2(50),
+   "OPER_URL"           VARCHAR2(255),
+   "OPER_IP"            VARCHAR2(50),
+   "OPER_LOCATION"      VARCHAR2(255),
+   "OPER_PARAM"         VARCHAR2(2000),
+   "STATUS"             NUMBER(1),
+   "ERROR_MSG"          VARCHAR2(2000),
+   "OPER_TIME"          TIMESTAMP,
+   CONSTRAINT PK_TB_SYS_OPER_LOG PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "TB_SYS_OPER_LOG" IS
+'操作日志表';
+
+COMMENT ON COLUMN "TB_SYS_OPER_LOG"."BUSINESS_TYPE" IS
+'业务类型（0其它 1新增 2修改 3删除）';
+
+COMMENT ON COLUMN "TB_SYS_OPER_LOG"."OPERATOR_TYPE" IS
+'操作类别（0其它 1后台用户 2手机端用户）';
+
+COMMENT ON COLUMN "TB_SYS_OPER_LOG"."STATUS" IS
+'操作状态（0正常 1异常）';

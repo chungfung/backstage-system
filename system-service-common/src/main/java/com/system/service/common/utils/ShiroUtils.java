@@ -29,6 +29,11 @@ public class ShiroUtils {
         }
         return userVO.getLoginName();
     }
+
+    public static String getIp(){
+        return getSubjct().getSession().getHost();
+    }
+
     public static void logout() {
         getSubjct().logout();
     }
