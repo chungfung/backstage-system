@@ -15,6 +15,7 @@ import java.util.Map;
  * @author ruoyi
  */
 public class Global {
+
     private static final Logger log = LoggerFactory.getLogger(Global.class);
 
     private static String NAME = "application.yml";
