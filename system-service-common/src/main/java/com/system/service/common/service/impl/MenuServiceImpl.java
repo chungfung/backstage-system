@@ -1,5 +1,6 @@
 package com.system.service.common.service.impl;
 
+import com.system.common.utils.StringUtils;
 import com.system.service.common.domain.MenuVO;
 import com.system.service.common.mapper.MenuMapper;
 import com.system.service.common.service.IMenuService;
@@ -7,11 +8,8 @@ import com.system.service.common.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: 陈葳
@@ -66,5 +64,17 @@ public class MenuServiceImpl implements IMenuService{
     @Override
     public MenuVO queryByName(String name) {
        return menuMapper.selectByMenuName(name);
+    }
+
+    @Override
+    public Set<String> queryPermsByUserId(String userId) {
+        List<MenuVO> perms = menuMapper.selectMenusByUserId(userId);
+        Set<String> permsSet = new HashSet<>();
+        for (MenuVO perm : perms) {
+            if (StringUtils.isNotEmpty(perm.getPerms())) {
+                permsSet.addAll(Arrays.asList(perm.getPerms().trim().split(",")));
+            }
+        }
+        return permsSet;
     }
 }

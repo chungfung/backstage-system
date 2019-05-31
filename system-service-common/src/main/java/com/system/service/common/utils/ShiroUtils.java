@@ -2,6 +2,7 @@ package com.system.service.common.utils;
 
 import com.system.service.common.domain.UserVO;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,6 +42,10 @@ public class ShiroUtils {
 
     public static void removeSubject(String sessionId) {
         subjectMap.remove(sessionId);
+    }
+
+    public static Session getSession() {
+        return SecurityUtils.getSubject().getSession();
     }
 
 }

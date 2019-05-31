@@ -23,4 +23,13 @@ public interface MenuMapper {
     MenuVO selectByMenuName(@Param("menuName") String menuName);
 
     int judgeMenuExistsByMenuName(@Param("menuName") String menuName);
+
+    /**
+     * 通过角色列表获取用户菜单
+     *
+     * @param userId
+     * @return
+     */
+    List<MenuVO> selectMenusByUserId(@Param("userId") String userId);
+
 }
