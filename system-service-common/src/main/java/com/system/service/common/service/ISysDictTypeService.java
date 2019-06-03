@@ -59,7 +59,7 @@ public interface ISysDictTypeService {
      * @param dictType 字典类型信息
      * @return 结果
      */
-    int insertDictType(SysDictTypeVO dictType);
+    int insertDictType(SysDictTypeVO dictType) throws Exception;
 
     /**
      * 修改保存字典类型信息

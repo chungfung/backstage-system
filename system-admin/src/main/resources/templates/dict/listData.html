@@ -7,7 +7,8 @@
 </form>
 
 <div class="pageHeader">
-    <form onsubmit="return navTabSearch(this);" th:action="@{dict/list_type}" method="post">
+    <form onsubmit="return navTabSearch(this);" rel="pagerForm" th:action="@{dict/list_data}" method="post">
+        <input type="hidden" name="dictType" th:value="${dictType}"/>
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
@@ -29,8 +30,14 @@
 <div class="pageContent">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="#" mask="true" target="dialog" title="新增" rel="listDataAdd"  height="400">
+            <li><a class="add" th:href="@{dict/add_data(dictType=${param.dictType})}" mask="true" target="dialog" title="新增" rel="listDataAdd"  height="400">
                 <i class="fa fa-plus-square fa-lg fa-fw"></i><label>新增</label></a></li>
+            <li><a class="edit" href="dict/edit_data?dictType={dictType}" mask="true"
+                   target="dialog" title="修改" rel="dictDataEdit" height="400">
+                <i class="fa fa-pencil fa-lg fa-fw"></i><label>修改</label></a></li>
+            <li><a class="delete" href="dict/remove_data?dictType={dictType}" mask="true"
+                   target="ajaxTodo" title="删除用户" rel="dictDataDelete"><i
+                    class="fa fa-trash-o fa-lg fa-fw"></i><label>删除</label></a></li>
         </ul>
     </div>
     <table class="list" width="100%" layoutH="115">
@@ -47,7 +54,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr target="userId" th:attr="rel=${item.id}" th:each="item: ${pageBean.list}">
+            <tr target="dictType" th:attr="rel=${item.dictType}+'&id='+${item.id}" th:each="item: ${pageBean.list}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.dictLabel}"></td>
                 <td th:text="${item.dictValue}"></td>

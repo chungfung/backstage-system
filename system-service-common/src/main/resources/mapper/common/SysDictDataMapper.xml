@@ -29,7 +29,7 @@
             AND DICT_TYPE = #{dictType}
           </if>
           <if test="dictLabel != null and dictLabel != ''">
-            AND DICT_LABEL like concat('%', #{dictLabel}, '%')
+            AND DICT_LABEL like '%' || #{dictLabel} || '%'
           </if>
           <if test="status != null and status != ''">
             AND STATUS = #{status}
@@ -91,6 +91,7 @@
 
   <insert id="insertDictData" parameterType="com.system.service.common.domain.SysDictDataVO">
       INSERT INTO TB_SYS_DICT_DATA(
+        ID,
         <if test="dictSort != null and dictSort != ''">dict_sort,</if>
         <if test="dictLabel != null and dictLabel != ''">dict_label,</if>
         <if test="dictValue != null and dictValue != ''">dict_value,</if>
@@ -101,11 +102,12 @@
         <if test="createUser != null and createUser != ''">create_user,</if>
         CREATE_TIME
       )VALUES(
+        SEQ_SYS_DICT_DATA.NEXTVAL,
         <if test="dictSort != null and dictSort != ''">#{dictSort},</if>
         <if test="dictLabel != null and dictLabel != ''">#{dictLabel},</if>
         <if test="dictValue != null and dictValue != ''">#{dictValue},</if>
         <if test="dictType != null and dictType != ''">#{dictType},</if>
-        <if test="cssClass != null and cssClass != ''">#{cssClass},</if>
+        <if test="isDefault != null and isDefault != ''">#{isDefault},</if>
         <if test="status != null">#{status},</if>
         <if test="remark != null and remark != ''">#{remark},</if>
         <if test="createUser != null and createUser != ''">#{createUser},</if>

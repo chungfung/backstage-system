@@ -12,7 +12,6 @@ import com.system.service.common.mapper.SysDictTypeMapper;
 import com.system.service.common.service.ISysDictTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -105,6 +104,10 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      */
     @Override
     public int insertDictType(SysDictTypeVO dictType) {
+        String uniqueResult = checkDictTypeUnique(dictType);
+        if(uniqueResult.equals(UserConstants.DICT_TYPE_NOT_UNIQUE)){
+            throw new BusinessException("该字典类型已经存在");
+        }
         return dictTypeMapper.insertDictType(dictType);
     }
 
@@ -115,7 +118,6 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 结果
      */
     @Override
-    @Transactional
     public int updateDictType(SysDictTypeVO dictType) {
         SysDictTypeVO oldDict = dictTypeMapper.selectDictTypeById(dictType.getId());
         dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<form method="post" th:action="@{dict/edit}" validate
+   onsubmit="return validateCallback(this,dialogAjaxDone);">
+    <div class="pageFormContent" layoutH="56">
+        <input type="hidden" name="id" th:value="${dict?.id}"/>
+        <dl>
+            <dt >字典名称:</dt>
+            <dd>
+                <input class="required textInput" byteLength="100"
+                    th:value="${dict?.dictName}"  name="dictName" type="text"  size="30"/>
+            </dd>
+        </dl>
+        <dl >
+            <dt >字典类型:</dt>
+            <dd ><input class="textInput required" byteLength="100"
+                        th:value="${dict?.dictType}" name="dictType" type="text" size="30"/></dd>
+        </dl>
+        <dl>
+            <dt>状态:</dt>
+            <dd>
+                <select class="combox required" name="status" th:value="${dict?.status}" id="status">
+                    <option th:value="1" th:selected="${dict?.status eq '1'?true:false}">正常</option>
+                    <option th:value="0" th:selected="${dict?.status eq '0'?true:false}" }>停用</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt>备注:</dt>
+            <dd><input class="textInput auditTextNeedDisabled" byteLength="500" size="30"
+                       th:value="${dict.remark}" name="remark" type="text"/></dd>
+        </dl>
+    </div>
+
+    <div class="formBar">
+        <ul>
+            <li>
+                <div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div>
+            </li>
+            <li>
+                <div class="button"><div class="buttonContent"><button type="Button" class="close">取消</button></div></div>
+            </li>
+        </ul>
+    </div>
+</form>
+</html>

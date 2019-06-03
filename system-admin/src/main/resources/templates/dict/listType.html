@@ -29,8 +29,14 @@
 <div class="pageContent">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="#" mask="true" target="dialog" title="新增" rel="listTypeAdd"  height="400">
+            <li><a class="add" href="dict/add" mask="true" target="dialog" title="新增" rel="listTypeAdd"  height="400">
                 <i class="fa fa-plus-square fa-lg fa-fw"></i><label>新增</label></a></li>
+            <li><a class="edit" href="dict/edit?dictType={dictType}" mask="true"
+                   target="dialog" title="修改" rel="dictEdit" height="400">
+                <i class="fa fa-pencil fa-lg fa-fw"></i><label>修改</label></a></li>
+            <li><a class="delete" href="dict/remove?dictType={dictType}" mask="true"
+                   target="ajaxTodo" title="删除用户" rel="userDelete"><i
+                    class="fa fa-trash-o fa-lg fa-fw"></i><label>删除</label></a></li>
             <li><a class="add" href="dict/list_data?dictType={dictType}" mask="true" target="navTab" title="字典数据" rel="listData">
                 <i class="fa fa-plus-square fa-lg fa-fw"> </i> <label>字典数据</label></a></li>
         </ul>
@@ -48,7 +54,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr target="dictType" th:attr="rel=${item.dictType}" th:each="item: ${pageBean.list}">
+            <tr target="dictType" th:attr="rel=${item.dictType}+'&dictId='+${item.id}" th:each="item: ${pageBean.list}">
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.dictName}"></td>
                 <td th:text="${item.dictType}"></td>

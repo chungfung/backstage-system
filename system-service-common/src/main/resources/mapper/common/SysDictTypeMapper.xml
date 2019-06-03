@@ -20,13 +20,13 @@
 		FROM TB_SYS_DICT_TYPE
 		<where>
 			<if test="dictName != null and dictName != ''">
-				AND dict_name like concat('%', #{dictName}, '%')
+				AND dict_name like '%' || #{dictName} ||'%')
 			</if>
 			<if test="status != null and status != ''">
 				AND status = #{status}
 			</if>
 			<if test="dictType != null and dictType != ''">
-				AND dict_type like concat('%', #{dictType}, '%')
+				AND dict_type like '%'|| #{dictName} || '%'
 			</if>
 		</where>
 	</select>
@@ -73,7 +73,8 @@
 	</update>
 
 	<insert id="insertDictType" parameterType="com.system.service.common.domain.SysDictTypeVO">
-		INSERT INTO SYS_DICT_TYPE(
+		INSERT INTO TB_SYS_DICT_TYPE(
+            ID,
 			<if test="dictName != null and dictName != ''">DICT_NAME,</if>
 			<if test="dictType != null and dictType != ''">DICT_TYPE,</if>
 			<if test="status != null">STATUS,</if>
@@ -81,6 +82,7 @@
 			<if test="createUser != null and createUser != ''">CREATE_USER,</if>
 			CREATE_TIME
 		)VALUES(
+            SEQ_SYS_DICT_TYPE.NEXTVAL,
 			<if test="dictName != null and dictName != ''">#{dictName},</if>
 			<if test="dictType != null and dictType != ''">#{dictType},</if>
 			<if test="status != null">#{status},</if>
