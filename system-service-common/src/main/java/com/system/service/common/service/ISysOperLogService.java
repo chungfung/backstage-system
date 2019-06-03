@@ -1,5 +1,7 @@
 package com.system.service.common.service;
 
+import com.system.common.page.PageBean;
+import com.system.common.page.PageParam;
 import com.system.service.common.domain.SysOperLogVO;
 import java.util.List;
 
@@ -20,9 +22,10 @@ public interface ISysOperLogService {
      * 查询系统操作日志集合
      *
      * @param operLog 操作日志对象
+     * @param pageParam 分页参数
      * @return 操作日志集合
      */
-    List<SysOperLogVO> selectOperLogList(SysOperLogVO operLog);
+    PageBean<SysOperLogVO> selectOperLogList(SysOperLogVO operLog, PageParam pageParam);
 
     /**
      * 批量删除系统操作日志

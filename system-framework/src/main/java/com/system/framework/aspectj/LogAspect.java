@@ -3,6 +3,7 @@ package com.system.framework.aspectj;
 import com.system.common.annotation.Log;
 import com.system.common.enums.BusinessStatus;
 import com.system.common.json.JSON;
+import com.system.common.utils.IpUtils;
 import com.system.common.utils.ServletUtils;
 import com.system.common.utils.StringUtils;
 import com.system.framework.manager.AsyncManager;
@@ -81,7 +82,7 @@ public class LogAspect {
             SysOperLogVO operLog = new SysOperLogVO();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
             // 请求的地址
-            String ip = ShiroUtils.getIp();
+            String ip = IpUtils.getHostIp();
             operLog.setOperIp(ip);
 
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());

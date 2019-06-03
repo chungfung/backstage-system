@@ -43,12 +43,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="businessType != null">
 				AND BUSINESS_TYPE = #{businessType}
 			</if>
-			<if test="businessTypes != null and businessTypes.length > 0">
-			    AND BUSINESS_TYPE IN
-			    <foreach collection="businessTypes" item="businessType" open="(" separator="," close=")">
-		 			#{businessType}
-		        </foreach> 
-			</if>
 			<if test="status != null">
 				AND STATUS = #{status}
 			</if>

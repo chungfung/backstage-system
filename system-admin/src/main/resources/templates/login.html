@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>用户管理子系统登录页</title>
+    <title>后台管理系统</title>
     <link rel="icon" th:href="@{/static/themes/default/images/favicon.ico}" type="image/x-icon"/>
     <link rel="stylesheet" th:href="@{/static/login/css/loginCss.css}" />
 </head>
@@ -18,7 +18,7 @@
         <img class="bgImg2" th:src="@{/static/login/img/shadow.png}" />
         <div class="form">
             <form th:action="@{/login}" method="post">
-                <span class="tit">用户管理子系统</span>
+                <span class="tit">后台管理系统</span>
                 <h2>用户登录</h2>
                 <div style="color:red" th:text="${msg==null?'':msg}"></div>
                 <label class="form-group">
