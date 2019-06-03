@@ -45,10 +45,10 @@
 				<th width="100">操作</th>
 			</tr>
 		</thead>
-        <th:block th:each="item:${list}">
-            <tr target="params" nodeHide="false" th:if="${item.parentId}==0"
+        <th:block th:each="item:${list}" th:if="${item.parentId}==0">
+            <tr target="params" nodeHide="false"
                 th:attr="rel='menuId='+${item.menuId}+'&'+'systemType='+${param.systemType},value=${item.menuId}">
-                <td th:text="${item.name}"><i class="fa fa-minus-square-o fa-fw" onclick="nodeHide(this)"></i></td>
+                <td><i class="fa fa-minus-square-o fa-fw" onclick="nodeHide(this)"></i> <th:block th:text="${item.name}"></th:block></td>
                 <td th:text="${item.menuId}"></td>
                 <td th:switch="${item.type}">
                     <th:block th:case="0">目录</th:block>
@@ -71,12 +71,13 @@
                        target="ajaxTodo" title="删除菜单" width="600"><span>删除</span></a>
                 </td>
             </tr>
-            <th:block th:each="childItem:${list}">
-                <tr target="params" nodeHide="false" th:if="${childItem.parentId} eq ${item.menuId}"
+            <th:block th:each="childItem:${list}" th:if="${childItem.parentId} eq ${item.menuId}">
+                <tr target="params" nodeHide="false"
                     th:attr="rel='menuId='+${childItem.menuId}+'&'+'systemType='+${param.systemType},value=${childItem.menuId}"
                     th:class="${item.menuId}">
-                    <td style="text-indent:25px;" th:text="${childItem.name}">
+                    <td style="text-indent:25px;">
                         <i th:if="${childItem.type}!=2" class="fa fa-minus-square-o fa-fw" onclick="nodeHide(this)"></i>
+                        <th:block th:text="${childItem.name}"></th:block>
                     </td>
                     <td th:text="${childItem.menuId}"></td>
                     <td th:switch="${childItem.type}">
@@ -100,13 +101,14 @@
                            target="ajaxTodo" title="删除菜单" width="600"><span>删除</span></a>
                     </td>
                 </tr>
-                <th:block th:each="child2Item:${list}">
-                    <tr target="params" nodeHide="false" th:if="${child2Item.parentId} eq ${childItem.menuId}"
+                <th:block th:each="child2Item:${list}" th:if="${child2Item.parentId} eq ${childItem.menuId}">
+                    <tr target="params" nodeHide="false"
                         th:attr="rel='menuId='+${child2Item.menuId}+'&'+'systemType='+${param.systemType},value=${child2Item.menuId}"
                         th:class="${childItem.menuId}+' '+${item.menuId}">
-                        <td style="text-indent:50px;" th:text="${child2Item.name}">
+                        <td style="text-indent:50px;">
                             <i th:if="${child2Item.type}!=2" class="fa fa-minus-square-o fa-fw"
                                onclick="nodeHide(this)"></i>
+                            <th:block th:text="${child2Item.name}"></th:block>
                         </td>
                         <td th:text="${child2Item.menuId}"></td>
                         <td th:switch="${child2Item.type}">
@@ -118,7 +120,7 @@
                         <td th:text="${child2Item.perms}"></td>
                         <td th:text="${child2Item.orderNum}"></td>
                         <td>
-                            <a class="button" th:if="${childItem.type}!=2"
+                            <a class="button" th:if="${child2Item.type}!=2"
                                th:href="@{menu/detail(parentId=${child2Item.menuId},systemType=${param.systemType})}"
                                mask="true"
                                target="dialog" title="新增菜单" width="600"><span>添加子菜单</span></a>
@@ -132,13 +134,14 @@
                                target="ajaxTodo" title="删除菜单" width="600"><span>删除</span></a>
                         </td>
                     </tr>
-                    <th:block th:each="child3Item:${list}">
-                        <tr target="params" nodeHide="false" th:if="${child3Item.parentId} eq ${child2Item.menuId}"
+                    <th:block th:each="child3Item:${list}" th:if="${child3Item.parentId} eq ${child2Item.menuId}">
+                        <tr target="params" nodeHide="false"
                             th:attr="rel='menuId='+${child3Item.menuId}+'&'+'systemType='+${param.systemType},value=${child3Item.menuId}"
                             th:class="${childItem.menuId}+' '+${item.menuId}+' '+${child2Item.menuId}">
                             <td style="text-indent:75px;" th:text="${child3Item.name}">
                                 <i th:if="${child3Item.type!=2}" class="fa fa-minus-square-o fa-fw"
                                    onclick="nodeHide(this)"></i>
+                                <th:block th:text="${child3Item.name}"></th:block>
                             </td>
                             <td th:text="${child3Item.menuId}"></td>
                             <td th:switch="${child3Item.type}">
@@ -150,7 +153,7 @@
                             <td th:text="${child3Item.perms}"></td>
                             <td th:text="${child3Item.orderNum}"></td>
                             <td>
-                                <a class="button" th:if="${childItem.type}!=2"
+                                <a class="button" th:if="${child3Item.type}!=2"
                                    th:href="@{menu/detail(parentId=${child3Item.menuId},systemType=${param.systemType})}"
                                    mask="true"
                                    target="dialog" title="新增菜单" width="600"><span>添加子菜单</span></a>
