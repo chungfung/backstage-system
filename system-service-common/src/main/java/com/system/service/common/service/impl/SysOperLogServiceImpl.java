@@ -1,5 +1,7 @@
 package com.system.service.common.service.impl;
 
+import com.system.common.page.PageBean;
+import com.system.common.page.PageParam;
 import com.system.common.text.Convert;
 import com.system.service.common.domain.SysOperLogVO;
 import com.system.service.common.mapper.SysOperLogMapper;
@@ -32,11 +34,16 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
     /**
      * 查询系统操作日志集合
      * @param operLog 操作日志对象
+     * @param pageParam 分页参数
      * @return 操作日志集合
      */
     @Override
-    public List<SysOperLogVO> selectOperLogList(SysOperLogVO operLog) {
-        return operLogMapper.selectOperLogList(operLog);
+    public PageBean<SysOperLogVO> selectOperLogList(SysOperLogVO operLog, PageParam pageParam) {
+        pageParam.startPage();
+        List<SysOperLogVO> list = operLogMapper.selectOperLogList(operLog);
+
+        PageBean<SysOperLogVO> pageBean = new PageBean<>(list);
+        return pageBean;
     }
 
     /**
