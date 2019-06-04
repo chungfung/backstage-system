@@ -13,13 +13,13 @@
 
 	<modules>
 		<module>system-admin</module>
-		<module>system-common</module>
 		<module>system-framework</module>
 		<module>system-job-admin</module>
 		<module>system-job-core</module>
 		<module>system-job-schedule</module>
 		<module>system-service</module>
 		<module>system-facade</module>
+		<module>system-common</module>
 	</modules>
 
 	<properties>
