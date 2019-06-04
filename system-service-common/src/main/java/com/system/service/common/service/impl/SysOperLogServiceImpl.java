@@ -1,5 +1,6 @@
 package com.system.service.common.service.impl;
 
+import com.system.common.enums.LogEnums;
 import com.system.common.page.PageBean;
 import com.system.common.page.PageParam;
 import com.system.common.text.Convert;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 操作日志 服务层处理
@@ -41,7 +43,11 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
     public PageBean<SysOperLogVO> selectOperLogList(SysOperLogVO operLog, PageParam pageParam) {
         pageParam.startPage();
         List<SysOperLogVO> list = operLogMapper.selectOperLogList(operLog);
-
+        list.stream().forEach(sysOperLogVO -> {
+            sysOperLogVO.setBusinessTypeLabel(LogEnums.BusinessType.getBusinessTypeDesc(sysOperLogVO.getBusinessType()));
+            sysOperLogVO.setOperatorTypeLabel(LogEnums.OperatorType.getOperatorTypeDesc(sysOperLogVO.getOperatorType()));
+            sysOperLogVO.setStatusLabel(LogEnums.Status.getStatusDesc(sysOperLogVO.getStatus()));
+        });
         PageBean<SysOperLogVO> pageBean = new PageBean<>(list);
         return pageBean;
     }
@@ -52,8 +58,9 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * @return
      */
     @Override
-    public int deleteOperLogByIds(String ids) {
-        return operLogMapper.deleteOperLogByIds(Convert.toStrArray(ids));
+    public String deleteOperLogByIds(String ids) {
+        operLogMapper.deleteOperLogByIds(Convert.toStrArray(ids));
+        return null;
     }
 
     /**
@@ -70,7 +77,8 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      * 清空操作日志
      */
     @Override
-    public void cleanOperLog() {
+    public String cleanOperLog() {
         operLogMapper.cleanOperLog();
+        return null;
     }
 }

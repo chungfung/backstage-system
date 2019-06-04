@@ -33,7 +33,7 @@ public interface ISysOperLogService {
      * @param ids 需要删除的数据
      * @return 结果
      */
-    int deleteOperLogByIds(String ids);
+    String deleteOperLogByIds(String ids);
 
     /**
      * 查询操作日志详细
@@ -46,5 +46,5 @@ public interface ISysOperLogService {
     /**
      * 清空操作日志
      */
-    void cleanOperLog();
+    String cleanOperLog();
 }

@@ -1,8 +1,6 @@
 package com.system.common.annotation;
 
-import com.system.common.enums.OperatorType;
-import com.system.common.enums.BusinessType;
-
+import com.system.common.enums.LogEnums;
 import java.lang.annotation.*;
 
 /**
@@ -14,6 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Log {
+
     /**
      * 模块
      */
@@ -22,12 +21,12 @@ public @interface Log {
     /**
      * 功能
      */
-    BusinessType businessType() default BusinessType.OTHER;
+    LogEnums.BusinessType businessType() default LogEnums.BusinessType.OTHER;
 
     /**
      * 操作人类别
      */
-    OperatorType operatorType() default OperatorType.MANAGE;
+    LogEnums.OperatorType operatorType() default LogEnums.OperatorType.MANAGE;
 
     /**
      * 是否保存请求的参数

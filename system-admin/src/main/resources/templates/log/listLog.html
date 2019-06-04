@@ -12,8 +12,37 @@
             <table class="searchContent">
                 <tr>
                     <td>
+                        系统模块：
+                        <input type="text" name="title" th:value="${param.title}" class="textInput">
+                    </td>
+                    <td>
                         操作员：
                         <input type="text" name="operName" th:value="${param.operName}" class="textInput">
+                    </td>
+                    <td>
+                        <select class="combox" name="operatorType">
+                            <option value="0">请选择操作类型</option>
+                            <option th:each="item: ${businessTypes}" th:value="${item.code}" th:selected="${(item.code+'') eq (param.operatorType+'') ? true :false}" th:text="${item.desc}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="combox" name="status">
+                            <option value="0">请选择操作状态</option>
+                            <option th:each="item: ${statuses}" th:value="${item.code}" th:selected="${(item.code+'') eq (param.status+'') ? true :false}" th:text="${item.desc}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                <tr>
+                    <td>
+                        开始时间：
+                        <input type="text" name="startDate" th:value="${param.startDate}" readonly="readonly"
+                               datefmt="yyyy-MM-dd" class="textInput date" size="15">
+                    </td>
+                    <td>
+                        结束时间：
+                        <input type="text" name="endDate" th:value="${param.endDate}" readonly="readonly"
+                               datefmt="yyyy-MM-dd" class="textInput date" size="15">
                     </td>
                 </tr>
             </table>
@@ -29,16 +58,21 @@
 <div class="pageContent">
     <div class="panelBar">
         <ul class="toolBar">
-            <li><a class="add" href="#" mask="true" target="dialog" title="删除" rel="listDataAdd"  height="400">
-                <i class="fa fa-plus-square fa-lg fa-fw"></i><label>删除</label></a></li>
+            <li><a href="log/delLog" mask="true" target="selectedTodo" rel="logIds" title="删除所选日志信息?"><i
+                    class="fa fa-times fa-lg fa-fw"></i> <label>删除</label></a></li>
+            <li><a href="log/delAllLog" mask="true" target="ajaxTodo" title="清空所有日志信息？">
+                <i class="fa fa-trash-o fa-lg fa-fw"></i><label>清空</label></a></li>
         </ul>
     </div>
     <table class="list" width="100%" layoutH="115">
         <thead>
         <tr>
-            <th width="50">主键</th>
-            <th width="100">标题</th>
-            <th width="100">业务类型</th>
+            <th width="60">
+                <input type="checkbox" class="checkboxCtrl" group="logIds"/>全选
+            </th>
+            <th width="50">日志编号</th>
+            <th width="100">系统模块</th>
+            <th width="100">操作类型</th>
             <th width="100">操作员</th>
             <th width="100">IP地址</th>
             <th width="100">操作状态</th>
@@ -47,15 +81,18 @@
         </tr>
         </thead>
         <tbody>
-            <tr target="userId" th:attr="rel=${item.id}" th:each="item: ${pageBean.list}">
+            <tr target="logId" th:attr="rel=${item.id}" th:each="item: ${pageBean.list}">
+                <td><input name="logIds" type="checkbox" th:value="${item.id}"></td>
                 <td th:text="${item.id}"></td>
                 <td th:text="${item.title}"></td>
-                <td th:text="${item.operatorType}"></td>
+                <td th:text="${item.operatorTypeLabel}"></td>
                 <td th:text="${item.operName}"></td>
                 <td th:text="${item.operIp}"></td>
-                <td th:text="${item.status}"></td>
+                <td th:text="${item.statusLabel}"></td>
                 <td th:text="${item.operTime}"></td>
-                <td></td>
+                <td>
+                    <a th:href="@{log/logDetail(id=${item.id})}" mask="true" target="dialog" title="日志信息" ><i class="fa fa-search fa-lg fa-fw"></i><label>详情</label></a>
+                </td>
             </tr>
         </tbody>
     </table>

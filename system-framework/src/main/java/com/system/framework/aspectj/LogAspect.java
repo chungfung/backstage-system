@@ -1,7 +1,7 @@
 package com.system.framework.aspectj;
 
 import com.system.common.annotation.Log;
-import com.system.common.enums.BusinessStatus;
+import com.system.common.enums.LogEnums;
 import com.system.common.json.JSON;
 import com.system.common.utils.IpUtils;
 import com.system.common.utils.ServletUtils;
@@ -80,7 +80,7 @@ public class LogAspect {
 
             // *========数据库日志=========*//
             SysOperLogVO operLog = new SysOperLogVO();
-            operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
+            operLog.setStatus(LogEnums.Status.NORMAL.getCode());
             // 请求的地址
             String ip = IpUtils.getHostIp();
             operLog.setOperIp(ip);
@@ -91,7 +91,7 @@ public class LogAspect {
             }
 
             if (e != null) {
-                operLog.setStatus(BusinessStatus.FAIL.ordinal());
+                operLog.setStatus(LogEnums.Status.EXCEPTION.getCode());
                 operLog.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
             }
             // 设置方法名称
@@ -120,11 +120,11 @@ public class LogAspect {
      */
     public void getControllerMethodDescription(Log log, SysOperLogVO operLog) throws Exception {
         // 设置action动作
-        operLog.setBusinessType(log.businessType().ordinal());
+        operLog.setBusinessType(log.businessType().getCode());
         // 设置标题
         operLog.setTitle(log.title());
         // 设置操作人类别
-        operLog.setOperatorType(log.operatorType().ordinal());
+        operLog.setOperatorType(log.operatorType().getCode());
         // 是否需要保存request，参数和值
         if (log.isSaveRequestData()) {
             // 获取参数的信息，传入到数据库中。

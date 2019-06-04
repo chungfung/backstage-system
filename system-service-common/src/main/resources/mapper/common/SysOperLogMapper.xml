@@ -33,21 +33,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectOperLogList" parameterType="com.system.service.common.domain.SysOperLogVO" resultMap="SysOperLogBaseResult">
-		SELECT ID, TITLE, BUSINESS_TYPE, METHOD, OPERATOR_TYPE, OPER_NAME, OPER_URL, OPER_IP, OPER_LOCATION,
-				OPER_PARAM, STATUS, ERROR_MSG, OPER_TIME
+		SELECT ID, TITLE, BUSINESS_TYPE, OPERATOR_TYPE, OPER_NAME, OPER_IP, STATUS, TO_CHAR(OPER_TIME,'YYYY-MM-DD hh:mm:ss') AS OPER_TIME
 		FROM TB_SYS_OPER_LOG
 		<where>
 			<if test="title != null and title != ''">
-				AND TITLE LIKE CONCAT('%', #{title}, '%')
-			</if>
-			<if test="businessType != null">
-				AND BUSINESS_TYPE = #{businessType}
-			</if>
-			<if test="status != null">
-				AND STATUS = #{status}
+				AND TITLE LIKE '%' || #{title} || '%'
 			</if>
 			<if test="operName != null and operName != ''">
-				AND OPER_NAME like concat('%', #{operName}, '%')
+				AND OPER_NAME LIKE '%' || #{operName} || '%'
+			</if>
+			<if test="businessType != null and businessType !='0'.toString()">
+				AND BUSINESS_TYPE = #{businessType}
+			</if>
+			<if test="operatorType != null and operatorType !='0'.toString()">
+				AND OPERATOR_TYPE = #{operatorType}
+			</if>
+			<if test="status != null and status !='0'.toString()">
+				AND STATUS = #{status}
+			</if>
+			<if test="startDate != null and startDate !=''">
+				and OPER_TIME &gt;= to_date(#{startDate,jdbcType=VARCHAR},'YYYY-MM-DD')
+			</if>
+			<if test="endDate != null and endDate !=''">
+				and OPER_TIME &lt; to_date(#{endDate,jdbcType=VARCHAR},'YYYY-MM-DD')
 			</if>
 		</where>
 	</select>
@@ -61,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<select id="selectOperLogById" parameterType="Long" resultMap="SysOperLogBaseResult">
 		SELECT ID, TITLE, BUSINESS_TYPE, METHOD, OPERATOR_TYPE, OPER_NAME, OPER_URL, OPER_IP, OPER_LOCATION,
-				OPER_PARAM, STATUS, ERROR_MSG, OPER_TIME
+				OPER_PARAM, STATUS, ERROR_MSG, TO_CHAR(OPER_TIME,'YYYY-MM-DD hh:mm:ss') AS OPER_TIME
 		FROM TB_SYS_OPER_LOG
 		WHERE ID = #{id}
 	</select>

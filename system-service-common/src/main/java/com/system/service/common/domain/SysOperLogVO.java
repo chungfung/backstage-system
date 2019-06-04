@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class SysOperLogVO {
 
-    private BigDecimal id;
+    private Long id;
 
     private String title;
 
@@ -34,4 +34,14 @@ public class SysOperLogVO {
 
     private String operTime;
 
+    // 拓展字段
+    private String businessTypeLabel;
+
+    private String operatorTypeLabel;
+
+    private String statusLabel;
+
+    private String startDate;
+
+    private String endDate;
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<form method="post" action="#" class="pageForm required-validate"
+	  onsubmit="return validateCallback(this,dialogAjaxDone);">
+
+	<div class="pageFormContent" layoutH="56">
+		<p>
+			<label>操作模块：</label>
+			<input  class="required textInput" byteLength="30"  maxlength="30" th:value="${detail?.operatorType }"/>
+		</p>
+		<p>
+			<label>登录信息：</label>
+			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operName }"/>
+		</p>
+		<p>
+			<label>请求地址：</label>
+			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operUrl }"/>
+		</p>
+		<p>
+			<label>操作方法：</label>
+			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operLocation }"/>
+		</p>
+		<p>
+			<label>请求参数：</label>
+			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operParam }"/>
+		</p>
+		<p>
+			<label>状态：</label>
+			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.status }"/>
+		</p>
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="button"><div class="buttonContent"><button type="Button" class="close">关闭</button></div></div>
+			</li>
+		</ul>
+	</div>
+</form>
+</html>
