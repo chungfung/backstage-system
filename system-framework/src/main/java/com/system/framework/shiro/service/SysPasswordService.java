@@ -2,7 +2,7 @@ package com.system.framework.shiro.service;
 
 import com.system.common.exception.user.UserPasswordNotMatchException;
 import com.system.common.exception.user.UserPasswordRetryLimitExceedException;
-import com.system.service.common.domain.UserVO;
+import com.system.facade.vo.UserVO;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;

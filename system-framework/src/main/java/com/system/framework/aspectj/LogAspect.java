@@ -8,9 +8,9 @@ import com.system.common.utils.ServletUtils;
 import com.system.common.utils.StringUtils;
 import com.system.framework.manager.AsyncManager;
 import com.system.framework.manager.factory.AsyncFactory;
-import com.system.service.common.domain.SysOperLogVO;
-import com.system.service.common.domain.UserVO;
-import com.system.service.common.utils.ShiroUtils;
+import com.system.facade.vo.SysOperLogVO;
+import com.system.facade.vo.UserVO;
+import com.system.service.utils.ShiroUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -27,6 +27,7 @@ import java.util.Map;
 
 /**
  * 操作日志记录处理
+ *
  * @author system
  */
 @Aspect
@@ -44,6 +45,7 @@ public class LogAspect {
 
     /**
      * 处理完请求后执行
+     *
      * @param joinPoint 切点
      */
     @AfterReturning(pointcut = "logPointCut()")
@@ -55,7 +57,7 @@ public class LogAspect {
      * 拦截异常操作
      *
      * @param joinPoint 切点
-     * @param e  异常
+     * @param e         异常
      */
     @AfterThrowing(value = "logPointCut()", throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
@@ -64,8 +66,9 @@ public class LogAspect {
 
     /**
      * 日志处理
+     *
      * @param joinPoint 切点
-     * @param e 异常信息
+     * @param e         异常信息
      */
     protected void handleLog(final JoinPoint joinPoint, final Exception e) {
         try {
@@ -134,6 +137,7 @@ public class LogAspect {
 
     /**
      * 获取请求的参数，放到log中
+     *
      * @param operLog 操作日志
      * @throws Exception 异常
      */

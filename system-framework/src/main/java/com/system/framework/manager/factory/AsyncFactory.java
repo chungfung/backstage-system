@@ -2,8 +2,8 @@ package com.system.framework.manager.factory;
 
 import com.system.common.utils.AddressUtils;
 import com.system.common.utils.spring.SpringUtils;
-import com.system.service.common.domain.SysOperLogVO;
-import com.system.service.common.service.ISysOperLogService;
+import com.system.facade.vo.SysOperLogVO;
+import com.system.facade.service.ISysOperLogService;
 
 import java.util.TimerTask;
 

@@ -18,7 +18,8 @@
 		<module>system-job-admin</module>
 		<module>system-job-core</module>
 		<module>system-job-schedule</module>
-		<module>system-service-common</module>
+		<module>system-service</module>
+		<module>system-facade</module>
 	</modules>
 
 	<properties>
@@ -268,10 +269,17 @@
 				<version>${hgsoft.backstage.version}</version>
 			</dependency>
 
-			<!-- 系统模块-->
+			<!-- 接口模块-->
 			<dependency>
 				<groupId>com.chungfung</groupId>
-				<artifactId>system-service-common</artifactId>
+				<artifactId>system-facade</artifactId>
+				<version>${hgsoft.backstage.version}</version>
+			</dependency>
+
+			<!-- 接口实现模块-->
+			<dependency>
+				<groupId>com.chungfung</groupId>
+				<artifactId>system-service</artifactId>
 				<version>${hgsoft.backstage.version}</version>
 			</dependency>
 

@@ -20,7 +20,6 @@
 	</properties>
 
 	<dependencies>
-		<!-- SpringBoot Web容器 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -71,7 +70,7 @@
 		<!-- 公共依赖 -->
 		<dependency>
 			<groupId>com.chungfung</groupId>
-			<artifactId>system-service-common</artifactId>
+			<artifactId>system-service</artifactId>
 		</dependency>
 
 	</dependencies>
