@@ -92,7 +92,8 @@
                 <td th:text="${item.statusLabel}"></td>
                 <td th:text="${item.operTime}"></td>
                 <td>
-                    <a th:href="@{log/logDetail(id=${item.id})}" mask="true" target="dialog" title="日志信息" ><i class="fa fa-search fa-lg fa-fw"></i><label>详情</label></a>
+                    <a th:href="@{log/logDetail(id=${item.id})}" mask="true" target="dialog" title="日志信息" width="900" height="380">
+                        <i class="fa fa-search fa-lg fa-fw"></i><label>详情</label></a>
                 </td>
             </tr>
         </tbody>

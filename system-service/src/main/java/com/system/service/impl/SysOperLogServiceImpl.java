@@ -69,7 +69,11 @@ public class SysOperLogServiceImpl implements ISysOperLogService {
      */
     @Override
     public SysOperLogVO selectOperLogById(Long operId) {
-        return operLogMapper.selectOperLogById(operId);
+        SysOperLogVO sysOperLogVO = operLogMapper.selectOperLogById(operId);
+        sysOperLogVO.setBusinessTypeLabel(LogEnums.BusinessType.getBusinessTypeDesc(sysOperLogVO.getBusinessType()));
+        sysOperLogVO.setOperatorTypeLabel(LogEnums.OperatorType.getOperatorTypeDesc(sysOperLogVO.getOperatorType()));
+        sysOperLogVO.setStatusLabel(LogEnums.Status.getStatusDesc(sysOperLogVO.getStatus()));
+        return sysOperLogVO;
     }
 
     /**

@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html  lang="zh" xmlns:th="http://www.thymeleaf.org">
-<form method="post" action="#" class="pageForm required-validate"
-	  onsubmit="return validateCallback(this,dialogAjaxDone);">
+<form method="post" class="pageForm required-validate">
 
 	<div class="pageFormContent" layoutH="56">
-		<p>
-			<label>操作模块：</label>
-			<input  class="required textInput" byteLength="30"  maxlength="30" th:value="${detail?.operatorType }"/>
-		</p>
-		<p>
-			<label>登录信息：</label>
-			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operName }"/>
-		</p>
-		<p>
-			<label>请求地址：</label>
-			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operUrl }"/>
-		</p>
-		<p>
-			<label>操作方法：</label>
-			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operLocation }"/>
-		</p>
-		<p>
-			<label>请求参数：</label>
-			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.operParam }"/>
-		</p>
-		<p>
-			<label>状态：</label>
-			<input class="required textInput" byteLength="200" maxlength="200" th:value="${detail?.status }"/>
-		</p>
+		<fieldset>
+			<legend>日志信息</legend>
+			<dl class="nowrap">
+				<dt><label>操作模块：</label></dt>
+				<dd><label th:text="${detail?.title} + '/' + ${detail?.operatorTypeLabel }"></label></dd>
+			</dl>
+			<dl class="nowrap">
+				<dt><label>登录信息：</label></dt>
+				<dd><label th:text="${detail?.operName} + '/' + ${detail?.operIp }"></label></dd>
+			</dl>
+			<dl class="nowrap">
+				<dt><label>请求地址：</label></dt>
+				<dd><label th:text="${detail?.operUrl}"></label></dd>
+			</dl>
+			<dl class="nowrap">
+				<dt><label>操作方法：</label></dt>
+				<dd><label th:text="${detail?.method}"></label></dd>
+			</dl>
+			<dl class="nowrap">
+				<dt><label>请求参数：</label></dt>
+				<dd><textarea name="textarea4" readonly="true" cols="80" rows="6"
+							  class="textInput readonly" th:text="${detail?.operParam}"></textarea></dd>
+			</dl>
+			<dl class="nowrap">
+				<dt><label>状态：</label></dt>
+				<dd><label th:text="${detail?.statusLabel}"></label></dd>
+			</dl>
+		</fieldset>
 	</div>
+
 	<div class="formBar">
 		<ul>
 			<li>

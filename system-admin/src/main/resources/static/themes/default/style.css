@@ -190,7 +190,7 @@ body, #splitBar { background:#DEF6FF;}
 .dialog .pageContent .pageFormContent { border-color:#b8d0d6; background:#FFF;}
 
 /* Pages default */
-.page .pageHeader, .formBar { border-color:#b8d0d6; background:#ebf0f5 url(../default/images/pageHeader_bg.png) repeat-x;}
+.page .pageHeader, .formBar { border-color:#b8d0d6;background-color: #eaf4ff;}
 .page .searchBar label { color:#183152;}
 
 /* Pages Form */
