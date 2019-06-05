@@ -13,7 +13,8 @@ import javax.annotation.PreDestroy;
  */
 @Component
 public class ShutdownManager {
-    private static final Logger logger = LoggerFactory.getLogger("sys-user");
+
+    private static final Logger logger = LoggerFactory.getLogger(ShutdownManager.class);
 
     @PreDestroy
     public void destroy() {
@@ -26,7 +27,7 @@ public class ShutdownManager {
     private void shutdownAsyncManager() {
         try {
             logger.info("====关闭后台任务任务线程池====");
-            AsyncManager.me().shutdown();
+            AsyncManager.getInstance().shutdown();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }

@@ -11,8 +11,7 @@ import java.util.Map;
 
 /**
  * 全局配置类
- *
- * @author ruoyi
+ * @author system
  */
 public class Global {
 

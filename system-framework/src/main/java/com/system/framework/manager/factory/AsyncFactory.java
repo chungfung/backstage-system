@@ -6,6 +6,7 @@ import com.system.facade.vo.SysOperLogVO;
 import com.system.facade.service.ISysOperLogService;
 
 import java.util.TimerTask;
+import java.util.concurrent.Callable;
 
 /**
  * 异步工厂（产生任务用）
@@ -25,6 +26,17 @@ public class AsyncFactory {
             // 远程查询操作地点
             operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
             SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
+            }
+        };
+    }
+
+    public static Callable testTask() {
+
+        return new Callable() {
+            @Override
+            public Object call() throws Exception {
+                System.out.println("执行现场任务。。。。");
+                return null;
             }
         };
     }
