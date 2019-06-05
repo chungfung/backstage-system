@@ -7,7 +7,8 @@
 </form>
 
 <div class="pageHeader">
-    <form onsubmit="return navTabSearch(this);" th:action="@{log/listLog}" method="post">
+    <form onsubmit="return navTabSearch(this);" rel="pagerForm"
+          th:action="@{log/listLog}" method="post">
         <div class="searchBar">
             <table class="searchContent">
                 <tr>
@@ -64,10 +65,10 @@
                 <i class="fa fa-trash-o fa-lg fa-fw"></i><label>清空</label></a></li>
         </ul>
     </div>
-    <table class="list" width="100%" layoutH="115">
+    <table class="list" width="100%" layoutH="140">
         <thead>
         <tr>
-            <th width="60">
+            <th width="30">
                 <input type="checkbox" class="checkboxCtrl" group="logIds"/>全选
             </th>
             <th width="50">日志编号</th>
@@ -76,7 +77,7 @@
             <th width="100">操作员</th>
             <th width="100">IP地址</th>
             <th width="100">操作状态</th>
-            <th width="100">操作时间</th>
+            <th width="150">操作时间</th>
             <th width="80">操作</th>
         </tr>
         </thead>

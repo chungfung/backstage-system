@@ -57,13 +57,13 @@ public class OperlogController extends BaseController {
     @RequestMapping(value = "delLog",method = RequestMethod.POST)
     @Log(title = "日志删除",businessType = LogEnums.BusinessType.DELETE,operatorType = LogEnums.OperatorType.MANAGE)
     public ModelAndView delete(@RequestParam String logIds) {
-        return jsonView(operLogService.deleteOperLogByIds(logIds),null,"listLog",false);
+        return jsonView(operLogService.deleteOperLogByIds(logIds),"listLog",null,false);
     }
 
     @RequiresPermissions("log:deleteAll")
     @RequestMapping(value = "delAllLog",method = RequestMethod.POST)
     @Log(title = "日志清除",businessType = LogEnums.BusinessType.DELETE,operatorType = LogEnums.OperatorType.MANAGE)
     public ModelAndView deleteAll() {
-        return jsonView(operLogService.cleanOperLog(),null,"listLog",false);
+        return jsonView(operLogService.cleanOperLog(),"listLog",null,false);
     }
 }
