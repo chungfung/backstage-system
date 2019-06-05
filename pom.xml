@@ -57,6 +57,7 @@
 		<jsoup.version>1.11.3</jsoup.version>
 		<easypoi.version>3.0.3</easypoi.version>
 		<validation-api.version>2.0.1.Final</validation-api.version>
+		<ulisesbocchio.version>2.1.0</ulisesbocchio.version>
 
 		<!-- ********************************** -->
 
@@ -288,6 +289,12 @@
 				<groupId>com.chungfung</groupId>
 				<artifactId>system-common</artifactId>
 				<version>${hgsoft.backstage.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.ulisesbocchio</groupId>
+				<artifactId>jasypt-spring-boot-starter</artifactId>
+				<version>${ulisesbocchio.version}</version>
 			</dependency>
 
 		</dependencies>
