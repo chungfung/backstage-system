@@ -2,6 +2,7 @@ package com.system.common.config.thread;
 
 import com.system.common.utils.Threads;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -20,21 +21,25 @@ public class ThreadPoolConfig {
     /**
      * 核心线程池大小
      */
-    private int corePoolSize = 50;
+    @Value("${thread.corePoolSize:50}")
+    private int corePoolSize;
 
     /**
      * 最大可创建的线程数
      */
+    @Value("${thread.maxPoolSize:200}")
     private int maxPoolSize = 200;
 
     /**
      * 队列最大长度
      */
+    @Value("${thread.queueCapacity:1000}")
     private int queueCapacity = 1000;
 
     /**
      * 线程池维护线程所允许的空闲时间
      */
+    @Value("${thread.keepAliveSeconds:300}")
     private int keepAliveSeconds = 300;
 
     @Bean(name = "threadPoolTaskExecutor")
