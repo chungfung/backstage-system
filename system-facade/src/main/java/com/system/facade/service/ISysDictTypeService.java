@@ -51,7 +51,7 @@ public interface ISysDictTypeService {
      * @return 结果
      * @throws Exception 异常
      */
-    int deleteDictTypeByIds(String ids) throws Exception;
+    int deleteDictTypeByIds(String ids);
 
     /**
      * 新增保存字典类型信息
@@ -59,7 +59,7 @@ public interface ISysDictTypeService {
      * @param dictType 字典类型信息
      * @return 结果
      */
-    int insertDictType(SysDictTypeVO dictType) throws Exception;
+    int insertDictType(SysDictTypeVO dictType);
 
     /**
      * 修改保存字典类型信息

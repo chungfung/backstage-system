@@ -1,6 +1,6 @@
 package com.system.framework.shiro.realm;
 
-import com.system.common.exception.user.*;
+import com.system.framework.exception.user.*;
 import com.system.framework.shiro.service.SysLoginService;
 import com.system.facade.vo.UserVO;
 import com.system.facade.service.IMenuService;
@@ -25,6 +25,7 @@ import java.util.Set;
  * @author ruoyi
  */
 public class UserRealm extends AuthorizingRealm {
+
     private static final Logger log = LoggerFactory.getLogger(UserRealm.class);
 
     @Autowired

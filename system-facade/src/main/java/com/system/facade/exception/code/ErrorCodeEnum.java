@@ -1,9 +1,9 @@
-package com.system.service.exception.code;
+package com.system.facade.exception.code;
 /**
  * 返回错误编码
  * @author 未知
  */
-public enum StatusCodes {
+public enum ErrorCodeEnum {
 
     SYS_OPR_ERR(700, "系统操作异常"),
     FILE_OPR_ERR(701,"文件操作异常"),
@@ -44,7 +44,7 @@ public enum StatusCodes {
     /** 描述 */
     private final String msg;
 
-    StatusCodes(int code, String msg) {
+    ErrorCodeEnum(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }

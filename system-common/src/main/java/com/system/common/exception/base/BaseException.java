@@ -1,57 +1,53 @@
 package com.system.common.exception.base;
 
-import com.system.common.utils.StringUtils;
 import com.system.common.utils.MessageUtils;
+import com.system.common.utils.StringUtils;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 基础异常
- *
- * @author ruoyi
+ * @ClassName BaseExceptionErrorCode
+ * @Description 服务层异常基类
+ * @Author ChungFung
+ * @Date 2018\11\13 0008 10:10
+ * @Version 1.0
  */
 public class BaseException extends RuntimeException {
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 所属模块
-     */
-    private String module;
+    private static final String UNKONWN = "未知错误！";
 
-    /**
-     * 错误码
-     */
+    @Getter
+    @Setter
     private String code;
 
-    /**
-     * 错误码对应的参数
-     */
+    @Setter
+    private String msg;
+
+    @Getter
+    @Setter
     private Object[] args;
 
-    /**
-     * 错误消息
-     */
-    private String defaultMessage;
-
-    public BaseException(String module, String code, Object[] args, String defaultMessage) {
-        this.module = module;
+    public BaseException(String code, String msg, Object... args) {
         this.code = code;
+        this.msg = msg;
         this.args = args;
-        this.defaultMessage = defaultMessage;
     }
 
-    public BaseException(String module, String code, Object[] args) {
-        this(module, code, args, null);
+    public BaseException(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
     }
 
-    public BaseException(String module, String defaultMessage) {
-        this(module, null, null, defaultMessage);
+    public BaseException(String code) {
+        this.code = code;
+        this.msg = null;
     }
 
-    public BaseException(String code, Object[] args) {
-        this(null, code, args, null);
-    }
-
-    public BaseException(String defaultMessage) {
-        this(null, null, null, defaultMessage);
+    public BaseException() {
+        this.code = null;
+        this.msg = null;
     }
 
     @Override
@@ -61,24 +57,19 @@ public class BaseException extends RuntimeException {
             message = MessageUtils.message(code, args);
         }
         if (message == null) {
-            message = defaultMessage;
+            message = msg;
+        }
+        if(message == null) {
+            message = UNKONWN;
         }
         return message;
     }
 
-    public String getModule() {
-        return module;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public Object[] getArgs() {
-        return args;
-    }
-
-    public String getDefaultMessage() {
-        return defaultMessage;
+    @Override
+    public String toString() {
+        return "BaseException{" +
+                "code='" + code + '\'' +
+                ", msg='" + msg + '\'' +
+                '}';
     }
 }

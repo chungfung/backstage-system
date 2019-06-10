@@ -1,11 +1,11 @@
 package com.system.service.impl;
 
 import com.system.common.constant.UserConstants;
-import com.system.common.exception.BusinessException;
 import com.system.common.page.PageBean;
 import com.system.common.page.PageParam;
 import com.system.common.text.Convert;
 import com.system.common.utils.StringUtils;
+import com.system.facade.exception.dict.DictException;
 import com.system.facade.service.ISysDictTypeService;
 import com.system.facade.vo.SysDictTypeVO;
 import com.system.service.mapper.SysDictDataMapper;
@@ -84,12 +84,12 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
      * @return 结果
      */
     @Override
-    public int deleteDictTypeByIds(String ids) throws BusinessException {
+    public int deleteDictTypeByIds(String ids){
         Long[] dictIds = Convert.toLongArray(ids);
         for (Long dictId : dictIds) {
             SysDictTypeVO dictType = selectDictTypeById(dictId);
             if (dictDataMapper.countDictDataByType(dictType.getDictType()) > 0) {
-                throw new BusinessException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
+                throw DictException.DICT_USED_EXCEPTION;
             }
         }
 
@@ -98,7 +98,6 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
 
     /**
      * 新增保存字典类型信息
-     *
      * @param dictType 字典类型信息
      * @return 结果
      */
@@ -106,7 +105,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
     public int insertDictType(SysDictTypeVO dictType) {
         String uniqueResult = checkDictTypeUnique(dictType);
         if(uniqueResult.equals(UserConstants.DICT_TYPE_NOT_UNIQUE)){
-            throw new BusinessException("该字典类型已经存在");
+            throw DictException.DICT_EXISTS_EXCEPTION;
         }
         return dictTypeMapper.insertDictType(dictType);
     }

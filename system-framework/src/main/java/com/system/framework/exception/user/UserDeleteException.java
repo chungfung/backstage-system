@@ -1,11 +1,12 @@
-package com.system.common.exception.user;
+package com.system.framework.exception.user;
+
+import com.system.common.exception.base.BaseException;
 
 /**
  * 用户账号已被删除
- *
- * @author ruoyi
+ * @author system
  */
-public class UserDeleteException extends UserException {
+public class UserDeleteException extends BaseException {
     private static final long serialVersionUID = 1L;
 
     public UserDeleteException() {
