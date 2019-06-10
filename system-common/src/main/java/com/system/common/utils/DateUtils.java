@@ -13,6 +13,7 @@ import java.util.Date;
  * @author ruoyi
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
+
     public static String YYYY = "yyyy";
 
     public static String YYYY_MM = "yyyy-MM";
@@ -22,6 +23,8 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 
     public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
+    private static final String YYYY_MM_DD_HH_MM_SS_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
 
     private static String[] parsePatterns = {
             "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
@@ -44,6 +47,10 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      */
     public static String getDate() {
         return dateTimeNow(YYYY_MM_DD);
+    }
+
+    public static final String getTimeMiles() {
+        return dateTimeNow(YYYY_MM_DD_HH_MM_SS_SSS);
     }
 
     public static final String getTime() {

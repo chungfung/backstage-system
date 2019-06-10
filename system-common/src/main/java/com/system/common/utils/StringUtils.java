@@ -2,6 +2,7 @@ package com.system.common.utils;
 
 import com.system.common.text.StrFormatter;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.Map;
 
@@ -317,5 +318,43 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             result.append(camel.substring(1).toLowerCase());
         }
         return result.toString();
+    }
+
+    /**
+     * 生成返回文件名
+     *
+     * @return
+     */
+    public static String getResFileName(String fileName, String num) {
+        String preFileName = getPreFileName(fileName);
+        return new StringBuilder().append(preFileName).append("_RES_").append(num)
+                .append("_0").append(".json").toString();
+    }
+
+    /**
+     * 从文件名中获取 发送方标识_接口类型_表名
+     *
+     * @param fileName ：44120001_UpLoad_inlist_20171009101939792_REQ_2_0.json
+     * @return
+     */
+    public static String getPreFileName(String fileName) {
+        String[] strs = fileName.split("_");
+        return strs[0] + "_" + strs[1] + "_" + strs[2] + "_" + strs[3];
+    }
+
+    /**
+     * 获取文件信息表路径中的文件名
+     *
+     * @param fileName
+     * @return
+     */
+    public static String getFileNameByFileName(String fileName) {
+//        if (org.apache.commons.lang3.StringUtils.isBlank(fileName)) {
+//            throw new BusinessException(StatusCodes.FILE_FORMAT_ERR, "FileName Blank");
+//        }
+        if (fileName.contains(File.separator)) {
+            fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+        }
+        return fileName.trim();
     }
 }
