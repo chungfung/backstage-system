@@ -54,7 +54,7 @@
 		<commons.fileupload.version>1.3.3</commons.fileupload.version>
 		<bitwalker.version>1.19</bitwalker.version>
 		<oshi.version>3.9.1</oshi.version>
-		<jsoup.version>1.11.3</jsoup.version>
+		<jsoup.version>1.14.2</jsoup.version>
 		<easypoi.version>3.0.3</easypoi.version>
 		<validation-api.version>2.0.1.Final</validation-api.version>
 		<ulisesbocchio.version>2.1.0</ulisesbocchio.version>
